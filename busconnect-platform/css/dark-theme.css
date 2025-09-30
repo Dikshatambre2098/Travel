@@ -1,0 +1,307 @@
+/* Dark Theme Styles */
+
+/* Light Theme (Default) */
+.theme-light {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --text-muted: #adb5bd;
+    --border-color: #dee2e6;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --accent-primary: #007bff;
+    --accent-secondary: #6c757d;
+    --success: #28a745;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --info: #17a2b8;
+}
+
+/* Dark Theme */
+.theme-dark {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #404040;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --text-muted: #808080;
+    --border-color: #404040;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --accent-primary: #4dabf7;
+    --accent-secondary: #868e96;
+    --success: #51cf66;
+    --warning: #ffd43b;
+    --danger: #ff6b6b;
+    --info: #22b8cf;
+}
+
+/* Apply theme variables to elements */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header */
+.header {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.nav-logo {
+    color: var(--text-primary);
+}
+
+.nav-link {
+    color: var(--text-secondary);
+}
+
+.nav-link:hover {
+    color: var(--accent-primary);
+}
+
+/* Cards and Containers */
+.story-card, .planning-panel, .notification-settings > div {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.story-card.detailed {
+    background-color: var(--bg-primary);
+}
+
+/* Inputs and Forms */
+.route-input, .search-input, .comment-input, .form-input {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.route-input:focus, .search-input:focus, .comment-input:focus, .form-input:focus {
+    border-color: var(--accent-primary);
+    background-color: var(--bg-primary);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.btn-secondary {
+    background-color: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+}
+
+.btn-outline {
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    background-color: transparent;
+}
+
+.btn-outline:hover {
+    background-color: var(--bg-secondary);
+}
+
+/* Dropdowns and Suggestions */
+.suggestions, .language-dropdown {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.suggestion-item:hover, .language-option:hover {
+    background-color: var(--bg-secondary);
+}
+
+/* Route Planner Specific */
+.route-option {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.route-option:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.route-option.selected {
+    border-color: var(--accent-primary);
+    background-color: var(--bg-primary);
+}
+
+.waypoint-item {
+    background-color: var(--bg-secondary);
+}
+
+.directions-container {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+}
+
+.directions-header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Notifications */
+.message.success {
+    background-color: var(--success);
+    color: white;
+}
+
+.message.info {
+    background-color: var(--info);
+    color: white;
+}
+
+.message.error {
+    background-color: var(--danger);
+    color: white;
+}
+
+/* Language Selector */
+.language-toggle {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+}
+
+.language-toggle:hover {
+    background-color: var(--bg-secondary);
+}
+
+/* Theme Toggle Styles */
+.theme-toggle {
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.toggle-switch {
+    width: 60px;
+    height: 30px;
+    background-color: var(--bg-tertiary);
+    border-radius: 15px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.toggle-switch.active {
+    background-color: var(--accent-primary);
+}
+
+.toggle-slider {
+    width: 26px;
+    height: 26px;
+    background-color: var(--bg-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.toggle-switch.active .toggle-slider {
+    transform: translateX(30px);
+}
+
+.sun-icon, .moon-icon {
+    font-size: 12px;
+    position: absolute;
+    transition: opacity 0.3s ease;
+}
+
+.sun-icon {
+    color: #ffd43b;
+    opacity: 1;
+}
+
+.moon-icon {
+    color: #4dabf7;
+    opacity: 0;
+}
+
+.toggle-switch.active .sun-icon {
+    opacity: 0;
+}
+
+.toggle-switch.active .moon-icon {
+    opacity: 1;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+}
+
+.hero-title {
+    color: var(--text-primary);
+}
+
+.hero-subtitle {
+    color: var(--text-secondary);
+}
+
+/* Featured Stories */
+.featured-preview {
+    background-color: var(--bg-secondary);
+}
+
+/* Comments */
+.comment {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comment-content strong {
+    color: var(--text-primary);
+}
+
+.comment-content p {
+    color: var(--text-secondary);
+}
+
+/* Tags */
+.tag {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.loading-spinner {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Mobile Menu */
+.hamburger .bar {
+    background-color: var(--text-primary);
+}
+
+/* Scrollbars for dark theme */
+.theme-dark ::-webkit-scrollbar {
+    width: 8px;
+}
+
+.theme-dark ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.theme-dark ::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+}
+
+.theme-dark ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}

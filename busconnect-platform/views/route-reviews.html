@@ -1,0 +1,35 @@
+<div ng-controller="ReviewController" class="route-reviews">
+    <!-- Rating Summary -->
+    <div class="rating-summary">
+        <div class="overall-rating">
+            <span class="score">{{routeSummary.averageRating | number:1}}</span>
+            <star-rating rating="routeSummary.averageRating" readonly="true"></star-rating>
+            <span>{{routeSummary.totalReviews}} reviews</span>
+        </div>
+    </div>
+    
+    <!-- Write Review -->
+    <div class="write-review" ng-show="canReview">
+        <button ng-click="showReviewForm = !showReviewForm" class="btn btn-primary">
+            <i class="fas fa-star"></i> Write Review
+        </button>
+        
+        <div class="review-form" ng-show="showReviewForm">
+            <star-rating rating="newReview.rating" on-rate="setRating(rating)"></star-rating>
+            <textarea ng-model="newReview.comment" placeholder="Share your experience..." class="form-textarea"></textarea>
+            <button ng-click="submitReview()" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+    
+    <!-- Reviews List -->
+    <div class="reviews-list">
+        <div class="review-item" ng-repeat="review in reviews">
+            <div class="reviewer-info">
+                <strong>{{review.userName}}</strong>
+                <span>{{formatDate(review.date)}}</span>
+            </div>
+            <star-rating rating="review.rating" readonly="true"></star-rating>
+            <p>{{review.comment}}</p>
+        </div>
+    </div>
+</div>

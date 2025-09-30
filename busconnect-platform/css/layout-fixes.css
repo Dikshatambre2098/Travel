@@ -1,0 +1,67 @@
+/* Global Layout Fixes */
+body {
+    overflow-x: hidden;
+}
+
+section {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Reviews Section Centering */
+.reviews-section .container,
+.review-form-section .container {
+    max-width: 800px;
+}
+
+.reviews-content {
+    width: 100%;
+}
+
+.reviews-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.review-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* Story Detail Section */
+.story-detail-section .container,
+.story-preview-section .container,
+.tip-detail-section .container {
+    max-width: 800px;
+}
+
+/* Community Section Grid Fix */
+.community-features {
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    section {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

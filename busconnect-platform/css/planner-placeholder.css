@@ -1,0 +1,25 @@
+/* Route Planner Placeholder Styles */
+.planner-placeholder {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-top: 2rem;
+}
+
+.planner-placeholder i {
+    font-size: 4rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+.planner-placeholder h3 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.planner-placeholder p {
+    color: #666;
+    font-size: 1.1rem;
+}

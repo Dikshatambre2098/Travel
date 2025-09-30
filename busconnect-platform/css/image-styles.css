@@ -1,0 +1,93 @@
+/* Image Styles for Travel Website */
+
+.story-image img, .feature-card img, .tip-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.story-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.story-image:hover img {
+    transform: scale(1.05);
+}
+
+.story-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+}
+
+.feature-card img {
+    height: 150px;
+    margin-bottom: 1rem;
+}
+
+.tip-card img {
+    height: 120px;
+    margin-bottom: 1rem;
+}
+
+.feature-card:hover img, .tip-card:hover img {
+    transform: scale(1.02);
+}
+
+/* Featured Stories Grid */
+.featured-preview {
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    padding: 0 2rem;
+}
+
+.featured-preview h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: white;
+    font-size: 2.5rem;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.story-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    color: #333;
+}
+
+.story-card:hover {
+    transform: translateY(-5px);
+}
+
+.story-content {
+    padding: 1.5rem;
+}
+
+.story-content h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.story-content p {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}

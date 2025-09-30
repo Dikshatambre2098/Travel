@@ -1,0 +1,60 @@
+/* Theme Responsive Styles */
+
+/* Mobile Theme Toggle */
+@media (max-width: 768px) {
+    .theme-toggle {
+        padding: 8px;
+    }
+    
+    .toggle-switch {
+        width: 50px;
+        height: 25px;
+    }
+    
+    .toggle-slider {
+        width: 21px;
+        height: 21px;
+    }
+    
+    .toggle-switch.active .toggle-slider {
+        transform: translateX(25px);
+    }
+    
+    .sun-icon, .moon-icon {
+        font-size: 10px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .theme-dark {
+        --bg-primary: #000000;
+        --bg-secondary: #1a1a1a;
+        --text-primary: #ffffff;
+        --border-color: #666666;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .toggle-slider,
+    .toggle-switch,
+    body,
+    .sun-icon,
+    .moon-icon {
+        transition: none !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    .theme-toggle,
+    .language-selector {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+}

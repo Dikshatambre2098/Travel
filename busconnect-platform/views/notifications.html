@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<div ng-controller="NotificationController" class="notification-settings">
+    <div class="container">
+        <h2>Notification Settings</h2>
+        
+        <!-- Notification Preferences -->
+        <div class="preferences-section">
+            <h3>Notification Preferences</h3>
+            <form ng-submit="savePreferences()">
+                <div class="preference-group">
+                    <label>
+                        <input type="checkbox" ng-model="preferences.email">
+                        Email Notifications
+                    </label>
+                    <small>Receive notifications via email</small>
+                </div>
+                
+                <div class="preference-group">
+                    <label>
+                        <input type="checkbox" ng-model="preferences.sms">
+                        SMS Notifications
+                    </label>
+                    <small>Receive notifications via SMS</small>
+                </div>
+                
+                <div class="preference-group">
+                    <label>
+                        <input type="checkbox" ng-model="preferences.push">
+                        Push Notifications
+                    </label>
+                    <small>Receive push notifications in browser</small>
+                </div>
+                
+                <div class="preference-group">
+                    <label>
+                        <input type="checkbox" ng-model="preferences.promotional">
+                        Promotional Offers
+                    </label>
+                    <small>Receive promotional offers and deals</small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" ng-disabled="loading">
+                    Save Preferences
+                </button>
+            </form>
+        </div>
+        
+        <!-- Test Notifications -->
+        <div class="test-section">
+            <h3>Test Notifications</h3>
+            <div class="test-buttons">
+                <button ng-click="testNotification('booking_confirmation')" 
+                        class="btn btn-success" ng-disabled="loading">
+                    Test Booking Confirmation
+                </button>
+                
+                <button ng-click="testNotification('booking_cancellation')" 
+                        class="btn btn-warning" ng-disabled="loading">
+                    Test Cancellation
+                </button>
+                
+                <button ng-click="testNotification('reminder')" 
+                        class="btn btn-info" ng-disabled="loading">
+                    Test Reminder
+                </button>
+                
+                <button ng-click="testNotification('promotional')" 
+                        class="btn btn-secondary" ng-disabled="loading">
+                    Test Promotional
+                </button>
+            </div>
+            
+            <!-- Channel-specific tests -->
+            <div class="channel-tests">
+                <h4>Test by Channel</h4>
+                <button ng-click="testNotification('booking_confirmation', 'email')" 
+                        class="btn btn-sm btn-outline-primary">Email Only</button>
+                <button ng-click="testNotification('booking_confirmation', 'sms')" 
+                        class="btn btn-sm btn-outline-primary">SMS Only</button>
+                <button ng-click="testNotification('booking_confirmation', 'push')" 
+                        class="btn btn-sm btn-outline-primary">Push Only</button>
+            </div>
+        </div>
+        
+        <!-- Notification History -->
+        <div class="history-section">
+            <h3>Recent Notifications</h3>
+            <div class="notification-list">
+                <div ng-repeat="notification in notifications | limitTo:10" 
+                     class="notification-item">
+                    <div class="notification-content">
+                        <strong>{{notification.type | uppercase}}</strong>
+                        <p>{{notification.message}}</p>
+                        <small>{{notification.timestamp | date:'medium'}}</small>
+                    </div>
+                    <div class="notification-channels">
+                        <span ng-repeat="channel in notification.channels" 
+                              class="channel-badge">{{channel}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

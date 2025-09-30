@@ -1,0 +1,376 @@
+/* Notifications Section Styles */
+.notifications-section {
+    background: #f8f9fa;
+    padding: 4rem 0;
+    min-height: 80vh;
+}
+
+.notifications-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.notifications-section p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.notification-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.notifications-list {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.notification-item {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.notification-item.unread {
+    border-left-color: #007bff;
+    background: #f8f9ff;
+}
+
+.notification-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.notification-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.notification-icon.booking {
+    background: #28a745;
+}
+
+.notification-icon.reminder {
+    background: #ffc107;
+    color: #333;
+}
+
+.notification-icon.offer {
+    background: #e83e8c;
+}
+
+.notification-icon.cancellation {
+    background: #dc3545;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-content h4 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.notification-content p {
+    margin: 0 0 0.5rem 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+.notification-time {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.close {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #999;
+    line-height: 1;
+}
+
+.close:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/* Notification Preferences */
+.notification-channels,
+.notification-types,
+.contact-info {
+    margin-bottom: 2rem;
+}
+
+.notification-channels h4,
+.notification-types h4,
+.contact-info h4 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.channel-options,
+.type-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.channel-option,
+.type-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.channel-option:hover,
+.type-option:hover {
+    border-color: #007bff;
+    background: #f8f9ff;
+}
+
+.channel-option input[type="checkbox"],
+.type-option input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.channel-option input[type="checkbox"]:checked + .checkmark,
+.type-option input[type="checkbox"]:checked + .checkmark {
+    background: #007bff;
+    border-color: #007bff;
+}
+
+.channel-option input[type="checkbox"]:checked + .checkmark::after,
+.type-option input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: -2px;
+    left: 3px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.channel-info {
+    flex: 1;
+}
+
+.channel-info strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+.channel-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+/* Navigation Bell Icon */
+.nav-link i.fa-bell {
+    margin-right: 0.5rem;
+}
+
+/* Dark Mode Support */
+.dark-mode .notifications-section {
+    background: #1a1a1a;
+}
+
+.dark-mode .notifications-section h2 {
+    color: #fff;
+}
+
+.dark-mode .notifications-section p {
+    color: #ccc;
+}
+
+.dark-mode .notification-item {
+    background: #2d2d2d;
+    color: #fff;
+}
+
+.dark-mode .notification-item.unread {
+    background: #1a1a2e;
+}
+
+.dark-mode .notification-content h4 {
+    color: #fff;
+}
+
+.dark-mode .notification-content p {
+    color: #ccc;
+}
+
+.dark-mode .modal-content {
+    background: #2d2d2d;
+    color: #fff;
+}
+
+.dark-mode .modal-header {
+    border-bottom-color: #444;
+}
+
+.dark-mode .modal-footer {
+    border-top-color: #444;
+}
+
+.dark-mode .channel-option,
+.dark-mode .type-option {
+    border-color: #444;
+    background: #333;
+}
+
+.dark-mode .channel-option:hover,
+.dark-mode .type-option:hover {
+    background: #404040;
+}
+
+.dark-mode .form-control {
+    background: #333;
+    border-color: #444;
+    color: #fff;
+}
+
+.dark-mode .checkmark {
+    border-color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .notification-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .notification-item {
+        padding: 1rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    .channel-option,
+    .type-option {
+        padding: 0.75rem;
+    }
+}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="busConnectApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusConnect - Dark Mode Demo</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/language-selector.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body ng-controller="MainController">
+    
+    <div class="demo-container">
+        <!-- Header with Theme Toggle -->
+        <header class="demo-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-bus"></i>
+                    <span>BusConnect</span>
+                </div>
+                <div class="header-controls">
+                    <theme-toggle></theme-toggle>
+                    <language-selector></language-selector>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Demo Content -->
+        <main class="demo-main">
+            <div class="demo-section">
+                <h1>Dark Mode Demo</h1>
+                <p>Toggle between light and dark themes using the switch above. Your preference will be saved automatically.</p>
+            </div>
+            
+            <!-- Sample Cards -->
+            <div class="demo-section">
+                <h2>Sample Content</h2>
+                <div class="card-grid">
+                    <div class="story-card">
+                        <div class="story-content">
+                            <h3>Amazing Journey to Goa</h3>
+                            <p>Discovered beautiful coastal routes and met wonderful people along the way. The sunset views were absolutely breathtaking!</p>
+                            <div class="story-actions">
+                                <button class="action-btn">
+                                    <i class="fas fa-heart"></i> 24
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-comment"></i> 8
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-content">
+                            <h3>Mountain Adventure</h3>
+                            <p>Took the scenic route through the mountains. The winding roads and fresh air made this trip unforgettable.</p>
+                            <div class="story-actions">
+                                <button class="action-btn">
+                                    <i class="fas fa-heart"></i> 18
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-comment"></i> 5
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form Demo -->
+            <div class="demo-section">
+                <h2>Form Elements</h2>
+                <div class="form-demo">
+                    <input type="text" placeholder="Search destinations..." class="search-input">
+                    <select class="filter-select">
+                        <option>All Categories</option>
+                        <option>Adventure</option>
+                        <option>Scenic</option>
+                        <option>Budget</option>
+                    </select>
+                    <div class="button-group">
+                        <button class="btn btn-primary">Primary Button</button>
+                        <button class="btn btn-secondary">Secondary Button</button>
+                        <button class="btn btn-outline">Outline Button</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Messages Demo -->
+            <div class="demo-section">
+                <h2>Notifications</h2>
+                <div class="messages-demo">
+                    <div class="message success">Success: Your story has been shared!</div>
+                    <div class="message info">Info: New route suggestions available</div>
+                    <div class="message error">Error: Unable to load content</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- AngularJS Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular-route.min.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/services/themeService.js"></script>
+    <script src="js/services/i18nService.js"></script>
+    <script src="js/filters/translateFilter.js"></script>
+    <script src="js/controllers/mainController.js"></script>
+    <script src="js/controllers/languageController.js"></script>
+    <script src="js/directives/themeToggle.js"></script>
+    <script src="js/directives/languageSelector.js"></script>
+    
+    <style>
+        .demo-container {
+            min-height: 100vh;
+            padding: 0;
+        }
+        
+        .demo-header {
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .demo-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+        }
+        
+        .demo-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .demo-section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-primary);
+            padding-bottom: 10px;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-demo {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-select {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background-color: var(--bg-secondary);
+            color: var(--accent-primary);
+        }
+    </style>
+    
+</body>
+</html>

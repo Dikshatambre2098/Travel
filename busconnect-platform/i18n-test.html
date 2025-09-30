@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="busConnectApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusConnect - Multi-Language Support Demo</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/language-selector.css">
+    <link rel="stylesheet" href="css/i18n-demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body ng-controller="LanguageController">
+    
+    <!-- I18n Demo Content -->
+    <div ng-include="'views/i18n-demo.html'"></div>
+    
+    <!-- AngularJS Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular-route.min.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/services/i18nService.js"></script>
+    <script src="js/filters/translateFilter.js"></script>
+    <script src="js/controllers/languageController.js"></script>
+    <script src="js/directives/languageSelector.js"></script>
+    
+</body>
+</html>

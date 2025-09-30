@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<div ng-controller="RoutePlannerController" class="route-planner">
+    <div class="planner-container">
+        <!-- Route Planning Panel -->
+        <div class="planning-panel">
+            <h2><i class="fas fa-route"></i> Route Planner</h2>
+            
+            <!-- Origin and Destination -->
+            <div class="route-inputs">
+                <div class="input-group">
+                    <label>From</label>
+                    <input type="text" ng-model="origin" 
+                           ng-change="searchPlaces(origin, 'origin')"
+                           placeholder="Enter starting point" class="route-input">
+                    <div class="suggestions" ng-show="originSuggestions.length">
+                        <div ng-repeat="place in originSuggestions" 
+                             ng-click="selectSuggestion(place, 'origin')"
+                             class="suggestion-item">
+                            {{place.formatted_address}}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>To</label>
+                    <input type="text" ng-model="destination"
+                           ng-change="searchPlaces(destination, 'destination')"
+                           placeholder="Enter destination" class="route-input">
+                    <div class="suggestions" ng-show="destinationSuggestions.length">
+                        <div ng-repeat="place in destinationSuggestions"
+                             ng-click="selectSuggestion(place, 'destination')"
+                             class="suggestion-item">
+                            {{place.formatted_address}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Waypoints -->
+            <div class="waypoints-section">
+                <div class="waypoints-header">
+                    <h3>Waypoints</h3>
+                    <button ng-click="toggleWaypointMode()" 
+                            ng-class="{'active': addingWaypoint}"
+                            class="btn btn-sm">
+                        <i class="fas fa-map-pin"></i> Add Waypoint
+                    </button>
+                </div>
+                
+                <div class="waypoints-list">
+                    <div ng-repeat="waypoint in waypoints" class="waypoint-item">
+                        <i class="fas fa-map-pin"></i>
+                        <span>{{waypoint.name}}</span>
+                        <button ng-click="removeWaypoint($index)" class="btn-remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button ng-click="planRoute()" ng-disabled="loading" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Plan Route
+                </button>
+                <button ng-click="toggleTraffic()" class="btn btn-secondary">
+                    <i class="fas fa-traffic-light"></i> 
+                    {{showTraffic ? 'Hide' : 'Show'}} Traffic
+                </button>
+                <button ng-click="clearRoute()" class="btn btn-outline">
+                    <i class="fas fa-eraser"></i> Clear
+                </button>
+            </div>
+            
+            <!-- Route Options -->
+            <div class="route-options" ng-show="routes.length > 1">
+                <h3>Route Options</h3>
+                <div class="route-list">
+                    <div ng-repeat="route in routes" 
+                         ng-click="selectRoute($index)"
+                         ng-class="{'selected': $index === 0}"
+                         class="route-option">
+                        <div class="route-summary">
+                            <strong>Route {{$index + 1}}</strong>
+                            <span>{{route.legs[0].distance.text}} - {{route.legs[0].duration.text}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Route Information -->
+            <div class="route-info" ng-show="routeInfo">
+                <h3>Route Details</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="fas fa-road"></i>
+                        <span>Distance: {{routeInfo.distance}}</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Duration: {{routeInfo.duration}}</span>
+                    </div>
+                    <div class="info-item" ng-show="routeInfo.trafficDuration">
+                        <i class="fas fa-traffic-light"></i>
+                        <span>With Traffic: {{routeInfo.trafficDuration}}</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-list"></i>
+                        <span>Steps: {{routeInfo.steps}}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Save Route -->
+            <div class="save-section" ng-show="selectedRoute">
+                <div class="input-group">
+                    <input type="text" ng-model="routeName" 
+                           placeholder="Route name (optional)" class="route-input">
+                </div>
+                <button ng-click="saveRoute()" class="btn btn-success">
+                    <i class="fas fa-save"></i> Save Route
+                </button>
+            </div>
+            
+            <!-- Saved Routes -->
+            <div class="saved-routes" ng-show="savedRoutes.length">
+                <h3>Saved Routes</h3>
+                <div class="saved-list">
+                    <div ng-repeat="saved in savedRoutes" 
+                         ng-click="loadSavedRoute(saved)"
+                         class="saved-item">
+                        <div class="saved-info">
+                            <strong>{{saved.name}}</strong>
+                            <small>{{saved.origin}} → {{saved.destination}}</small>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Map Container -->
+        <div class="map-container">
+            <div id="route-map" class="route-map"></div>
+            <div class="map-controls">
+                <button ng-click="map.setZoom(map.getZoom() + 1)" class="map-btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button ng-click="map.setZoom(map.getZoom() - 1)" class="map-btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Directions Panel -->
+    <div class="directions-container" ng-show="selectedRoute">
+        <div class="directions-header">
+            <h3><i class="fas fa-directions"></i> Turn-by-Turn Directions</h3>
+        </div>
+        <div id="directions-panel" class="directions-panel"></div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" ng-show="loading">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Planning your route...</p>
+        </div>
+    </div>
+</div>

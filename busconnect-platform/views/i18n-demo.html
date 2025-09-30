@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<div class="i18n-demo-container">
+    <div class="container">
+        <div class="demo-header">
+            <h1>{{'select_language' | translate}}</h1>
+            <language-selector></language-selector>
+        </div>
+        
+        <!-- Navigation Demo -->
+        <div class="demo-section">
+            <h2>Navigation</h2>
+            <nav class="demo-nav">
+                <a href="#" class="nav-link">{{'nav_home' | translate}}</a>
+                <a href="#" class="nav-link">{{'nav_stories' | translate}}</a>
+                <a href="#" class="nav-link">{{'nav_community' | translate}}</a>
+                <a href="#" class="nav-link">{{'nav_tips' | translate}}</a>
+                <a href="#" class="nav-link">{{'nav_share' | translate}}</a>
+                <a href="#" class="nav-link">{{'nav_notifications' | translate}}</a>
+            </nav>
+        </div>
+        
+        <!-- Hero Section Demo -->
+        <div class="demo-section">
+            <h2>Hero Section</h2>
+            <div class="hero-demo">
+                <h1>{{'hero_title' | translate}}</h1>
+                <p>{{'hero_subtitle' | translate}}</p>
+                <div class="button-group">
+                    <button class="btn btn-primary">{{'btn_share_story' | translate}}</button>
+                    <button class="btn btn-secondary">{{'btn_explore_stories' | translate}}</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Categories Demo -->
+        <div class="demo-section">
+            <h2>Categories</h2>
+            <div class="categories-demo">
+                <select class="form-select">
+                    <option value="">{{'all_categories' | translate}}</option>
+                    <option value="adventure">{{'category_adventure' | translate}}</option>
+                    <option value="budget">{{'category_budget' | translate}}</option>
+                    <option value="scenic">{{'category_scenic' | translate}}</option>
+                    <option value="tips">{{'category_tips' | translate}}</option>
+                    <option value="food">{{'category_food' | translate}}</option>
+                    <option value="safety">{{'category_safety' | translate}}</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Actions Demo -->
+        <div class="demo-section">
+            <h2>Actions</h2>
+            <div class="actions-demo">
+                <button class="btn btn-like">{{'btn_like' | translate}}</button>
+                <button class="btn btn-comment">{{'btn_comment' | translate}}</button>
+                <button class="btn btn-share">{{'btn_share' | translate}}</button>
+                <input type="text" placeholder="{{'add_comment' | translate}}" class="form-input">
+                <button class="btn btn-post">{{'btn_post' | translate}}</button>
+            </div>
+        </div>
+        
+        <!-- Notifications Demo -->
+        <div class="demo-section">
+            <h2>{{'notification_settings' | translate}}</h2>
+            <div class="notifications-demo">
+                <h3>{{'notification_preferences' | translate}}</h3>
+                <div class="preference-item">
+                    <input type="checkbox" id="email">
+                    <label for="email">{{'email_notifications' | translate}}</label>
+                </div>
+                <div class="preference-item">
+                    <input type="checkbox" id="sms">
+                    <label for="sms">{{'sms_notifications' | translate}}</label>
+                </div>
+                <div class="preference-item">
+                    <input type="checkbox" id="push">
+                    <label for="push">{{'push_notifications' | translate}}</label>
+                </div>
+                <div class="preference-item">
+                    <input type="checkbox" id="promo">
+                    <label for="promo">{{'promotional_offers' | translate}}</label>
+                </div>
+                <button class="btn btn-primary">{{'save_preferences' | translate}}</button>
+            </div>
+        </div>
+        
+        <!-- Messages Demo -->
+        <div class="demo-section">
+            <h2>Messages</h2>
+            <div class="messages-demo">
+                <div class="message success">{{'story_liked' | translate}}</div>
+                <div class="message info">{{'comment_added' | translate}}</div>
+                <div class="message success">{{'preferences_saved' | translate}}</div>
+                <div class="message error">{{'error_loading' | translate}}</div>
+            </div>
+        </div>
+        
+        <!-- Search Demo -->
+        <div class="demo-section">
+            <h2>Search</h2>
+            <div class="search-demo">
+                <input type="text" placeholder="{{'search_placeholder' | translate}}" class="search-input">
+            </div>
+        </div>
+    </div>
+</div>

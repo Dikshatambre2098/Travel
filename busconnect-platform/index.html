@@ -1,0 +1,2425 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="busConnectApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusConnect - Share Your Journey Stories</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/additional-sections.css">
+    <link rel="stylesheet" href="css/story-meta.css">
+    <link rel="stylesheet" href="css/image-styles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/search-results.css">
+    <link rel="stylesheet" href="css/seat-selection.css">
+    <link rel="stylesheet" href="css/language-selector.css">
+    <link rel="stylesheet" href="css/payment.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/reviews.css">
+    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="css/tips.css">
+    <link rel="stylesheet" href="css/route-planner.css">
+    <link rel="stylesheet" href="css/layout-fixes.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body ng-controller="MainController">
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-bus"></i>
+                    <span>BusConnect</span>
+                </div>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" ng-click="setActiveSection('home')" onclick="showSection('home')" data-i18n="nav_home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" ng-click="setActiveSection('stories')" onclick="showSection('stories')" data-i18n="nav_stories">Stories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" ng-click="setActiveSection('community')" onclick="showSection('community')" data-i18n="nav_community">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" ng-click="setActiveSection('tips')" onclick="showSection('tips')" data-i18n="nav_tips">Travel Tips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link share-btn" ng-click="setActiveSection('share')" onclick="showSection('share')" data-i18n="nav_share">Share Story</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" ng-click="setActiveSection('booking')" onclick="showSection('booking')" data-i18n="nav_booking">Book Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showSection('notifications')">
+                            <i class="fas fa-bell"></i> Notifications
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showSection('route-planner')">
+                            <i class="fas fa-route"></i> Route Planner
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="nav-controls">
+                    <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="theme-toggle" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="nav-item language-selector">
+                        <select id="language-selector" onchange="changeLanguage(this.value)">
+                            <option value="en">🇺🇸 EN</option>
+                            <option value="hi">🇮🇳 हिं</option>
+                            <option value="es">🇪🇸 ES</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="hero-section" style="display: block;">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="hero_title">Share Your Bus Journey Stories</h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Connect with fellow travelers, share experiences, and discover amazing routes across the country</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" ng-click="setActiveSection('share')" onclick="showSection('share')">
+                        <i class="fas fa-camera"></i> <span data-i18n="share_story_btn">Share Your Story</span>
+                    </button>
+                    <button class="btn btn-secondary" ng-click="setActiveSection('stories')" onclick="showSection('stories')">
+                        <i class="fas fa-book-open"></i> <span data-i18n="explore_stories_btn">Explore Stories</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Featured Stories Preview -->
+            <div class="featured-preview">
+                <h2 data-i18n="featured_stories">Featured Stories</h2>
+                <div class="story-grid">
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=250&fit=crop" alt="Bus Travel">
+                            <div class="story-overlay">
+                                <span class="story-route">Mumbai → Goa</span>
+                            </div>
+                        </div>
+                        <div class="story-content">
+                            <h3>Coastal Paradise</h3>
+                            <p>Beautiful beaches and scenic coastal roads made this journey unforgettable.</p>
+                            <div class="story-meta">
+                                <span class="author"><i class="fas fa-user"></i> Priya S.</span>
+                                <span class="likes"><i class="fas fa-heart"></i> 24</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop" alt="Mountain Road">
+                            <div class="story-overlay">
+                                <span class="story-route">Delhi → Manali</span>
+                            </div>
+                        </div>
+                        <div class="story-content">
+                            <h3>Mountain Adventure</h3>
+                            <p>Winding mountain roads and snow-capped peaks created magical moments.</p>
+                            <div class="story-meta">
+                                <span class="author"><i class="fas fa-user"></i> Arjun P.</span>
+                                <span class="likes"><i class="fas fa-heart"></i> 18</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&h=250&fit=crop" alt="Desert Landscape">
+                            <div class="story-overlay">
+                                <span class="story-route">Jaipur → Udaipur</span>
+                            </div>
+                        </div>
+                        <div class="story-content">
+                            <h3>Royal Rajasthan</h3>
+                            <p>Majestic palaces and desert landscapes showcased India's royal heritage.</p>
+                            <div class="story-meta">
+                                <span class="author"><i class="fas fa-user"></i> Vikram S.</span>
+                                <span class="likes"><i class="fas fa-heart"></i> 32</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stories Section -->
+        <section id="stories" class="stories-section" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-i18n="travel_stories">Travel Stories</h2>
+                    <p data-i18n="stories_subtitle">Discover amazing bus journey experiences shared by fellow travelers</p>
+                </div>
+                <div class="stories-grid">
+                    <div class="story-card detailed" onclick="showStoryDetail('goa-journey')">
+                        <div class="story-image">
+                            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=300&fit=crop" alt="Goa Beach">
+                        </div>
+                        <div class="story-content">
+                            <h3>Amazing Journey to Goa</h3>
+                            <p>The journey from Mumbai to Goa was absolutely incredible. The coastal views were breathtaking, and the bus was comfortable throughout the 12-hour journey.</p>
+                            <div class="story-meta">
+                                <span class="author"><i class="fas fa-user"></i> Priya Sharma</span>
+                                <span class="route"><i class="fas fa-route"></i> Mumbai → Goa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card detailed" onclick="showStoryDetail('manali-adventure')">
+                        <div class="story-image">
+                            <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600&h=300&fit=crop" alt="Mountain Landscape">
+                        </div>
+                        <div class="story-content">
+                            <h3>Mountain Adventure to Manali</h3>
+                            <p>The Delhi to Manali route is a must-do for any mountain lover. The changing landscapes from plains to hills to snow-capped peaks is mesmerizing.</p>
+                            <div class="story-meta">
+                                <span class="author"><i class="fas fa-user"></i> Arjun Patel</span>
+                                <span class="route"><i class="fas fa-route"></i> Delhi → Manali</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card detailed" onclick="showStoryDetail('rajasthan-budget')">
+                        <div class="story-image">
+                            <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=600&h=300&fit=crop" alt="Rajasthan Palace">
+                        </div>
+                        <div class="story-content">
+                            <h3>Budget Trip to Rajasthan</h3>
+                            <p>Traveled from Jaipur to Udaipur on a budget-friendly bus. The journey through Rajasthan countryside was amazing with traditional villages and historic forts.</p>
+                            <div class="story-meta">
+                                <span class="author"><i class="fas fa-user"></i> Vikram Singh</span>
+                                <span class="route"><i class="fas fa-route"></i> Jaipur → Udaipur</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Story Detail Section -->
+        <section id="story-detail" class="story-detail-section" style="display: none;">
+            <div class="container">
+                <div class="story-detail-header">
+                    <button onclick="showSection('stories')" class="btn btn-outline">← Back to Stories</button>
+                </div>
+                
+                <article class="story-detail-content">
+                    <div class="story-hero">
+                        <img id="story-detail-image" src="" alt="Story Image" class="story-detail-img">
+                        <div class="story-hero-overlay">
+                            <h1 id="story-detail-title">Story Title</h1>
+                            <div class="story-detail-meta">
+                                <span id="story-detail-author"><i class="fas fa-user"></i> Author</span>
+                                <span id="story-detail-route"><i class="fas fa-route"></i> Route</span>
+                                <span class="story-date"><i class="fas fa-calendar"></i> 2 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="story-detail-body">
+                        <div id="story-detail-text" class="story-text">
+                            <!-- Story content will be loaded here -->
+                        </div>
+                        
+                        <div class="story-actions">
+                            <button class="action-btn" onclick="likeStory()">
+                                <i class="fas fa-heart"></i> <span id="like-count">24</span> Likes
+                            </button>
+                            <button class="action-btn" onclick="shareStory()">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                        
+                        <div class="story-comments">
+                            <h3>Comments</h3>
+                            <div class="comment">
+                                <div class="comment-author">Rahul M.</div>
+                                <div class="comment-text">Great story! I'm planning a similar trip next month.</div>
+                                <div class="comment-date">1 day ago</div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-author">Sneha K.</div>
+                                <div class="comment-text">Thanks for sharing! Very helpful tips.</div>
+                                <div class="comment-date">3 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Share Story Section -->
+        <section id="share" class="share-section" style="display: none;">
+            <div class="container">
+                <h2 data-i18n="share_journey">Share Your Journey</h2>
+                <div class="share-form">
+                    <div class="form-group">
+                        <label>Story Title</label>
+                        <input type="text" id="story-title" placeholder="Give your story a catchy title" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="story-author" placeholder="Enter your name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Route</label>
+                        <input type="text" id="story-route" placeholder="e.g., Mumbai to Goa" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Journey Date</label>
+                        <input type="date" id="story-date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="story-category" class="form-select">
+                            <option value="adventure">Adventure</option>
+                            <option value="budget">Budget Travel</option>
+                            <option value="scenic">Scenic Routes</option>
+                            <option value="tips">Travel Tips</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Story</label>
+                        <textarea id="story-content" placeholder="Share your travel experience in detail..." class="form-textarea" rows="8" required></textarea>
+                        <small>Tell us about your journey, what made it special, any tips for other travelers, etc.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Story Image URL (Optional)</label>
+                        <input type="url" id="story-image" placeholder="https://example.com/image.jpg" class="form-input">
+                        <small>Paste a URL of an image that represents your journey</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="previewStory()">Preview Story</button>
+                        <button type="button" class="btn btn-primary" onclick="submitStory()">Share Your Story</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Story Preview Section -->
+        <section id="story-preview" class="story-preview-section" style="display: none;">
+            <div class="container">
+                <div class="preview-header">
+                    <button onclick="showSection('share')" class="btn btn-outline">← Back to Edit</button>
+                    <h2>Story Preview</h2>
+                </div>
+                
+                <div class="preview-content">
+                    <article class="story-preview-card">
+                        <div class="preview-hero">
+                            <img id="preview-image" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=400&fit=crop" alt="Story Image" class="preview-img">
+                            <div class="preview-overlay">
+                                <h1 id="preview-title">Your Story Title</h1>
+                                <div class="preview-meta">
+                                    <span id="preview-author"><i class="fas fa-user"></i> Your Name</span>
+                                    <span id="preview-route"><i class="fas fa-route"></i> Your Route</span>
+                                    <span id="preview-date"><i class="fas fa-calendar"></i> Journey Date</span>
+                                    <span id="preview-category" class="category-badge">Category</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-body">
+                            <div id="preview-content" class="preview-text">
+                                Your story content will appear here...
+                            </div>
+                            
+                            <div class="preview-actions">
+                                <button class="action-btn">
+                                    <i class="fas fa-heart"></i> 0 Likes
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <div class="preview-buttons">
+                        <button class="btn btn-outline" onclick="showSection('share')">Edit Story</button>
+                        <button class="btn btn-primary" onclick="publishStory()">Publish Story</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Booking Section -->
+        <section id="booking" class="booking-section" style="display: none;">
+            <div class="container">
+                <h2 data-i18n="book_tickets">Book Bus Tickets</h2>
+                <p data-i18n="book_subtitle">Find and book the best bus routes for your journey</p>
+                <div class="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-i18n="from_label">From</label>
+                            <input type="text" id="fromCity" data-i18n-placeholder="from_label" placeholder="Departure city" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="to_label">To</label>
+                            <input type="text" id="toCity" data-i18n-placeholder="to_label" placeholder="Destination city" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-i18n="departure_date">Departure Date</label>
+                            <input type="date" id="departureDate" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="return_date">Return Date (Optional)</label>
+                            <input type="date" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Passengers</label>
+                            <select class="form-select">
+                                <option>1 Passenger</option>
+                                <option>2 Passengers</option>
+                                <option>3 Passengers</option>
+                                <option>4 Passengers</option>
+                                <option>5+ Passengers</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Bus Type</label>
+                            <select class="form-select">
+                                <option>All Types</option>
+                                <option>AC Sleeper</option>
+                                <option>Non-AC Sleeper</option>
+                                <option>AC Seater</option>
+                                <option>Non-AC Seater</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="searchBuses()" data-i18n="search_buses">Search Buses</button>
+                </div>
+                
+                <!-- Popular Routes -->
+                <div class="popular-routes">
+                    <h3 data-i18n="popular_routes">Popular Routes</h3>
+                    <div class="routes-grid">
+                        <div class="route-card" onclick="showRouteReviews('Mumbai to Goa')">
+                            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300&h=150&fit=crop" alt="Mumbai to Goa">
+                            <div class="route-info">
+                                <h4>Mumbai → Goa</h4>
+                                <p>Starting from ₹800</p>
+                                <span class="duration">12 hours</span>
+                                <div class="route-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="rating-text">4.1 (89 reviews)</span>
+                                    <button class="btn-link" onclick="showRouteReviews('Mumbai to Goa')">View Reviews</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="route-card" onclick="showRouteReviews('Delhi to Manali')">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=150&fit=crop" alt="Delhi to Manali">
+                            <div class="route-info">
+                                <h4>Delhi → Manali</h4>
+                                <p>Starting from ₹1200</p>
+                                <span class="duration">14 hours</span>
+                                <div class="route-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="rating-text">4.3 (124 reviews)</span>
+                                    <button class="btn-link" onclick="showRouteReviews('Delhi to Manali')">View Reviews</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="route-card" onclick="showRouteReviews('Jaipur to Udaipur')">
+                            <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=300&h=150&fit=crop" alt="Jaipur to Udaipur">
+                            <div class="route-info">
+                                <h4>Jaipur → Udaipur</h4>
+                                <p>Starting from ₹600</p>
+                                <span class="duration">8 hours</span>
+                                <div class="route-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="rating-text">3.9 (67 reviews)</span>
+                                    <button class="btn-link" onclick="showRouteReviews('Jaipur to Udaipur')">View Reviews</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Search Results Section -->
+        <section id="search-results" class="search-results-section" style="display: none;">
+            <div class="container">
+                <h2>Available Buses</h2>
+                <div class="search-summary">
+                    <p>Mumbai to Goa • Today • 1 Passenger</p>
+                    <button onclick="showSection('booking')" class="btn btn-outline">Modify Search</button>
+                </div>
+                
+                <div class="bus-results">
+                    <div class="bus-card">
+                        <div class="bus-info">
+                            <h3>Volvo AC Sleeper</h3>
+                            <p class="operator">RedBus Travels</p>
+                            <div class="timing">
+                                <span class="departure">22:30 Mumbai</span>
+                                <span class="duration">12h 30m</span>
+                                <span class="arrival">11:00+1 Goa</span>
+                            </div>
+                            <div class="bus-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text">4.2 (156 reviews)</span>
+                                <button class="btn-link" onclick="showReviews('Volvo AC Sleeper')">View Reviews</button>
+                            </div>
+                        </div>
+                        <div class="bus-price">
+                            <span class="price">₹1,200</span>
+                            <button class="btn btn-primary" onclick="showSeatSelection('Volvo AC Sleeper', 1200)"><span data-i18n="select_seats">Select Seats</span></button>
+                        </div>
+                    </div>
+                    
+                    <div class="bus-card">
+                        <div class="bus-info">
+                            <h3>AC Seater</h3>
+                            <p class="operator">Sharma Travels</p>
+                            <div class="timing">
+                                <span class="departure">23:00 Mumbai</span>
+                                <span class="duration">11h 45m</span>
+                                <span class="arrival">10:45+1 Goa</span>
+                            </div>
+                            <div class="bus-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text">3.8 (89 reviews)</span>
+                                <button class="btn-link" onclick="showReviews('AC Seater')">View Reviews</button>
+                            </div>
+                        </div>
+                        <div class="bus-price">
+                            <span class="price">₹900</span>
+                            <button class="btn btn-primary" onclick="showSeatSelection('AC Seater', 900)"><span data-i18n="select_seats">Select Seats</span></button>
+                        </div>
+                    </div>
+                    
+                    <div class="bus-card">
+                        <div class="bus-info">
+                            <h3>Non-AC Sleeper</h3>
+                            <p class="operator">National Travels</p>
+                            <div class="timing">
+                                <span class="departure">21:00 Mumbai</span>
+                                <span class="duration">13h 00m</span>
+                                <span class="arrival">10:00+1 Goa</span>
+                            </div>
+                            <div class="bus-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text">3.1 (42 reviews)</span>
+                                <button class="btn-link" onclick="showReviews('Non-AC Sleeper')">View Reviews</button>
+                            </div>
+                        </div>
+                        <div class="bus-price">
+                            <span class="price">₹650</span>
+                            <button class="btn btn-primary" onclick="showSeatSelection('Non-AC Sleeper', 650)"><span data-i18n="select_seats">Select Seats</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seat Selection Section -->
+        <section id="seat-selection" class="seat-selection-section" style="display: none;">
+            <div class="container">
+                <div class="seat-header">
+                    <button onclick="showSection('search-results')" class="btn btn-outline">← Back to Results</button>
+                    <h2 id="selected-bus-name">Select Your Seats</h2>
+                </div>
+                
+                <div class="seat-layout">
+                    <div class="bus-layout">
+                        <div class="driver-area">Driver</div>
+                        <div class="seats-grid" id="seats-container">
+                            <!-- Seats will be generated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="seat-legend">
+                        <div class="legend-item">
+                            <div class="seat available"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat selected"></div>
+                            <span>Selected</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat booked"></div>
+                            <span>Booked</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="booking-summary">
+                    <div class="selected-seats">
+                        <h3>Selected Seats: <span id="selected-seat-numbers">None</span></h3>
+                        <p>Total Amount: ₹<span id="total-amount">0</span></p>
+                    </div>
+                    <button class="btn btn-primary" id="proceed-btn" onclick="proceedToPayment()" disabled>Proceed to Payment</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Payment Section -->
+        <section id="payment" class="payment-section" style="display: none;">
+            <div class="container">
+                <div class="payment-header">
+                    <button onclick="showSection('seat-selection')" class="btn btn-outline">← Back to Seats</button>
+                    <h2>Payment Details</h2>
+                </div>
+                
+                <div class="payment-content">
+                    <div class="booking-details">
+                        <h3>Booking Summary</h3>
+                        <div class="detail-row">
+                            <span>Bus:</span>
+                            <span id="payment-bus-name">-</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Seats:</span>
+                            <span id="payment-seats">-</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Total Amount:</span>
+                            <span id="payment-total">₹0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-form">
+                        <h3>Payment Information</h3>
+                        <div class="form-group">
+                            <label>Passenger Name</label>
+                            <input type="text" id="passenger-name" placeholder="Enter full name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+                            <input type="tel" id="mobile-number" placeholder="Enter mobile number" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" placeholder="Enter email address" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                            <select id="payment-method" class="form-select">
+                                <option value="card">Credit/Debit Card</option>
+                                <option value="upi">UPI</option>
+                                <option value="wallet">Digital Wallet</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary btn-large" onclick="processPayment()">Pay Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Reviews Section -->
+        <section id="reviews" class="reviews-section" style="display: none;">
+            <div class="container">
+                <div class="reviews-header">
+                    <button onclick="showSection('search-results')" class="btn btn-outline">← Back to Results</button>
+                    <h2 id="reviews-bus-name">Bus Reviews</h2>
+                </div>
+                
+                <div class="reviews-content">
+                    <div class="reviews-summary">
+                        <div class="overall-rating">
+                            <div class="rating-number">4.2</div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="rating-count">Based on 156 reviews</div>
+                        </div>
+                        <button class="btn btn-primary" onclick="showReviewForm()">Write a Review</button>
+                    </div>
+                    
+                    <div class="reviews-list">
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <strong>Priya S.</strong>
+                                    <div class="review-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="review-date">2 days ago</span>
+                            </div>
+                            <p class="review-text">Excellent service! The bus was clean, comfortable, and arrived on time. The staff was very helpful.</p>
+                        </div>
+                        
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <strong>Arjun M.</strong>
+                                    <div class="review-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="review-date">1 week ago</span>
+                            </div>
+                            <p class="review-text">Good journey overall. Seats were comfortable but could use better air conditioning.</p>
+                        </div>
+                        
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <strong>Kavya R.</strong>
+                                    <div class="review-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="review-date">2 weeks ago</span>
+                            </div>
+                            <p class="review-text">Average experience. Bus was delayed by 30 minutes but the journey was smooth.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Review Form Section -->
+        <section id="review-form" class="review-form-section" style="display: none;">
+            <div class="container">
+                <div class="form-header">
+                    <button onclick="showSection('reviews')" class="btn btn-outline">← Back to Reviews</button>
+                    <h2>Write a Review</h2>
+                </div>
+                
+                <div class="review-form">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="reviewer-name" placeholder="Enter your name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div class="star-rating" id="star-rating">
+                            <i class="far fa-star" onclick="setRating(1)"></i>
+                            <i class="far fa-star" onclick="setRating(2)"></i>
+                            <i class="far fa-star" onclick="setRating(3)"></i>
+                            <i class="far fa-star" onclick="setRating(4)"></i>
+                            <i class="far fa-star" onclick="setRating(5)"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Your Review</label>
+                        <textarea id="review-text" placeholder="Share your experience..." class="form-textarea" rows="5" required></textarea>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="submitReview()">Submit Review</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Community Section -->
+        <section id="community" class="community-section" style="display: none;">
+            <div class="container">
+                <h2 data-i18n="travel_community">Travel Community</h2>
+                <p data-i18n="community_subtitle">Connect with fellow travelers, share tips, and discover new routes together.</p>
+                <div class="community-features">
+                    <div class="feature-card" onclick="showCommunitySection('groups')">
+                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=200&fit=crop" alt="Travel Group">
+                        <i class="fas fa-users"></i>
+                        <h3>Join Groups</h3>
+                        <p>Find travel groups based on your interests and destinations.</p>
+                        <div class="feature-stats">
+                            <span><i class="fas fa-users"></i> 156 Groups</span>
+                            <span><i class="fas fa-user-friends"></i> 2.3k Members</span>
+                        </div>
+                    </div>
+                    <div class="feature-card" onclick="showCommunitySection('routes')">
+                        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=300&h=200&fit=crop" alt="Route Map">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Share Routes</h3>
+                        <p>Discover and share the best bus routes with the community.</p>
+                        <div class="feature-stats">
+                            <span><i class="fas fa-route"></i> 89 Routes</span>
+                            <span><i class="fas fa-star"></i> 4.2 Avg Rating</span>
+                        </div>
+                    </div>
+                    <div class="feature-card" onclick="showCommunitySection('discussions')">
+                        <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=300&h=200&fit=crop" alt="Travel Discussion">
+                        <i class="fas fa-comments"></i>
+                        <h3>Get Advice</h3>
+                        <p>Ask questions and get travel advice from experienced travelers.</p>
+                        <div class="feature-stats">
+                            <span><i class="fas fa-comments"></i> 234 Discussions</span>
+                            <span><i class="fas fa-reply"></i> 1.2k Replies</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Community Groups Section -->
+        <section id="community-groups" class="community-detail-section" style="display: none;">
+            <div class="container">
+                <div class="community-header">
+                    <button onclick="showSection('community')" class="btn btn-outline">← Back to Community</button>
+                    <h2>Travel Groups</h2>
+                </div>
+                
+                <div class="groups-grid">
+                    <div class="group-card">
+                        <div class="group-info">
+                            <h3>Goa Beach Lovers</h3>
+                            <p>Connect with fellow beach enthusiasts traveling to Goa</p>
+                            <div class="group-meta">
+                                <span><i class="fas fa-users"></i> 89 members</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Mumbai → Goa</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Join Group</button>
+                    </div>
+                    
+                    <div class="group-card">
+                        <div class="group-info">
+                            <h3>Mountain Adventurers</h3>
+                            <p>For those who love hill station journeys and mountain routes</p>
+                            <div class="group-meta">
+                                <span><i class="fas fa-users"></i> 124 members</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Delhi → Manali</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Join Group</button>
+                    </div>
+                    
+                    <div class="group-card">
+                        <div class="group-info">
+                            <h3>Budget Travelers</h3>
+                            <p>Share tips and tricks for budget-friendly bus travel</p>
+                            <div class="group-meta">
+                                <span><i class="fas fa-users"></i> 67 members</span>
+                                <span><i class="fas fa-map-marker-alt"></i> All Routes</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Join Group</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Community Routes Section -->
+        <section id="community-routes" class="community-detail-section" style="display: none;">
+            <div class="container">
+                <div class="community-header">
+                    <button onclick="showSection('community')" class="btn btn-outline">← Back to Community</button>
+                    <h2>Shared Routes</h2>
+                </div>
+                
+                <div class="routes-list">
+                    <div class="shared-route">
+                        <div class="route-header">
+                            <h3>Mumbai to Goa via Coastal Highway</h3>
+                            <div class="route-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>5.0</span>
+                            </div>
+                        </div>
+                        <p>Scenic coastal route with beautiful sea views. Best time to travel is early morning.</p>
+                        <div class="route-details">
+                            <span><i class="fas fa-clock"></i> 12 hours</span>
+                            <span><i class="fas fa-rupee-sign"></i> ₹800-1200</span>
+                            <span><i class="fas fa-user"></i> Shared by Priya S.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="shared-route">
+                        <div class="route-header">
+                            <h3>Delhi to Manali Mountain Express</h3>
+                            <div class="route-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>4.2</span>
+                            </div>
+                        </div>
+                        <p>Amazing mountain journey with stops at scenic viewpoints. Carry warm clothes!</p>
+                        <div class="route-details">
+                            <span><i class="fas fa-clock"></i> 14 hours</span>
+                            <span><i class="fas fa-rupee-sign"></i> ₹1000-1500</span>
+                            <span><i class="fas fa-user"></i> Shared by Arjun P.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Community Discussions Section -->
+        <section id="community-discussions" class="community-detail-section" style="display: none;">
+            <div class="container">
+                <div class="community-header">
+                    <button onclick="showSection('community')" class="btn btn-outline">← Back to Community</button>
+                    <h2>Travel Discussions</h2>
+                    <button class="btn btn-primary" onclick="showNewDiscussion()">Start Discussion</button>
+                </div>
+                
+                <div class="discussions-list">
+                    <div class="discussion-item">
+                        <div class="discussion-header">
+                            <h3>Best time to visit Goa by bus?</h3>
+                            <span class="discussion-time">2 hours ago</span>
+                        </div>
+                        <p>Planning a trip to Goa next month. What's the best time to travel and which bus service is most reliable?</p>
+                        <div class="discussion-meta">
+                            <span><i class="fas fa-user"></i> Asked by Rahul M.</span>
+                            <span><i class="fas fa-comments"></i> 8 replies</span>
+                            <span><i class="fas fa-thumbs-up"></i> 12 likes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="discussion-item">
+                        <div class="discussion-header">
+                            <h3>Safety tips for overnight bus journeys</h3>
+                            <span class="discussion-time">1 day ago</span>
+                        </div>
+                        <p>Share your safety tips and experiences for long overnight bus journeys, especially for solo travelers.</p>
+                        <div class="discussion-meta">
+                            <span><i class="fas fa-user"></i> Asked by Sneha K.</span>
+                            <span><i class="fas fa-comments"></i> 15 replies</span>
+                            <span><i class="fas fa-thumbs-up"></i> 24 likes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="discussion-item">
+                        <div class="discussion-header">
+                            <h3>Budget travel hacks for students</h3>
+                            <span class="discussion-time">3 days ago</span>
+                        </div>
+                        <p>Looking for budget-friendly travel options and money-saving tips for student travelers.</p>
+                        <div class="discussion-meta">
+                            <span><i class="fas fa-user"></i> Asked by Vikram S.</span>
+                            <span><i class="fas fa-comments"></i> 22 replies</span>
+                            <span><i class="fas fa-thumbs-up"></i> 18 likes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Discussion Form -->
+        <section id="new-discussion" class="new-discussion-section" style="display: none;">
+            <div class="container">
+                <div class="form-header">
+                    <button onclick="showCommunitySection('discussions')" class="btn btn-outline">← Back to Discussions</button>
+                    <h2>Start New Discussion</h2>
+                </div>
+                
+                <div class="discussion-form">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="discussion-author" placeholder="Enter your name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Discussion Title</label>
+                        <input type="text" id="discussion-title" placeholder="What would you like to discuss?" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="discussion-category" class="form-select">
+                            <option value="general">General Discussion</option>
+                            <option value="tips">Travel Tips</option>
+                            <option value="routes">Route Reviews</option>
+                            <option value="safety">Safety & Security</option>
+                            <option value="budget">Budget Travel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Your Question/Topic</label>
+                        <textarea id="discussion-content" placeholder="Share your question or start a discussion topic..." class="form-textarea" rows="6" required></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" onclick="showCommunitySection('discussions')">Cancel</button>
+                        <button class="btn btn-primary" onclick="submitDiscussion()">Post Discussion</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Travel Tips Section -->
+        <section id="tips" class="tips-section" style="display: none;">
+            <div class="container">
+                <h2>Travel Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card" onclick="showTipDetail('advance-booking')">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=300&h=150&fit=crop" alt="Planning">
+                        <i class="fas fa-clock"></i>
+                        <h3>Book in Advance</h3>
+                        <p>Book your bus tickets 2-3 days in advance to get better seats and prices.</p>
+                    </div>
+                    <div class="tip-card" onclick="showTipDetail('safety-tips')">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=150&fit=crop" alt="Safety">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Safety First</h3>
+                        <p>Always inform someone about your travel plans and carry emergency contacts.</p>
+                    </div>
+                    <div class="tip-card" onclick="showTipDetail('packing-light')">
+                        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=150&fit=crop" alt="Packing">
+                        <i class="fas fa-backpack"></i>
+                        <h3>Pack Light</h3>
+                        <p>Travel with minimal luggage for a comfortable journey.</p>
+                    </div>
+                    <div class="tip-card" onclick="showTipDetail('stay-connected')">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=150&fit=crop" alt="Technology">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Stay Connected</h3>
+                        <p>Keep your phone charged and carry a power bank for long journeys.</p>
+                    </div>
+                    <div class="tip-card" onclick="showTipDetail('budget-travel')">
+                        <img src="https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=300&h=150&fit=crop" alt="Budget">
+                        <i class="fas fa-rupee-sign"></i>
+                        <h3>Budget Travel</h3>
+                        <p>Smart tips to save money while traveling by bus without compromising comfort.</p>
+                    </div>
+                    <div class="tip-card" onclick="showTipDetail('comfort-tips')">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=300&h=150&fit=crop" alt="Comfort">
+                        <i class="fas fa-bed"></i>
+                        <h3>Travel Comfort</h3>
+                        <p>Essential tips to make your long bus journey comfortable and enjoyable.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tip Detail Section -->
+        <section id="tip-detail" class="tip-detail-section" style="display: none;">
+            <div class="container">
+                <div class="tip-detail-header">
+                    <button onclick="showSection('tips')" class="btn btn-outline">← Back to Tips</button>
+                </div>
+                
+                <article class="tip-detail-content">
+                    <div class="tip-hero">
+                        <img id="tip-detail-image" src="" alt="Tip Image" class="tip-detail-img">
+                        <div class="tip-hero-overlay">
+                            <h1 id="tip-detail-title">Tip Title</h1>
+                            <div class="tip-detail-meta">
+                                <span><i class="fas fa-user"></i> BusConnect Team</span>
+                                <span><i class="fas fa-calendar"></i> Travel Guide</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-detail-body">
+                        <div id="tip-detail-content" class="tip-content">
+                            <!-- Tip content will be loaded here -->
+                        </div>
+                        
+                        <div class="tip-actions">
+                            <button class="action-btn" onclick="likeTip()">
+                                <i class="fas fa-thumbs-up"></i> <span id="tip-like-count">15</span> Helpful
+                            </button>
+                            <button class="action-btn" onclick="shareTip()">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                        
+                        <div class="related-tips">
+                            <h3>Related Tips</h3>
+                            <div class="related-tips-grid">
+                                <div class="related-tip" onclick="showTipDetail('safety-tips')">
+                                    <h4>Safety First</h4>
+                                    <p>Essential safety tips for bus travel</p>
+                                </div>
+                                <div class="related-tip" onclick="showTipDetail('budget-travel')">
+                                    <h4>Budget Travel</h4>
+                                    <p>Save money on your bus journeys</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Notifications Section -->
+        <section id="notifications" class="notifications-section" style="display: none;">
+            <div class="container">
+                <h2>Notification Center</h2>
+                <p>Manage your travel notifications and preferences</p>
+
+                <div class="notification-controls">
+                    <button class="btn btn-primary" onclick="showNotificationSettings()">
+                        <i class="fas fa-cog"></i> Notification Settings
+                    </button>
+                    <button class="btn btn-secondary" onclick="markAllRead()">
+                        <i class="fas fa-check-double"></i> Mark All Read
+                    </button>
+                </div>
+
+                <div class="notifications-list">
+                    <div class="notification-item unread">
+                        <div class="notification-icon booking">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Booking Confirmed</h4>
+                            <p>Your booking for Mumbai to Pune on Dec 25, 2024 has been confirmed. Ticket ID: BC123456</p>
+                            <span class="notification-time">2 minutes ago</span>
+                        </div>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-icon reminder">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Travel Reminder</h4>
+                            <p>Your bus departs in 2 hours. Please reach the boarding point 30 minutes early.</p>
+                            <span class="notification-time">1 hour ago</span>
+                        </div>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-icon offer">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Special Offer</h4>
+                            <p>Get 20% off on your next booking! Use code SAVE20. Valid till Dec 31, 2024.</p>
+                            <span class="notification-time">3 hours ago</span>
+                        </div>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-icon cancellation">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Booking Cancelled</h4>
+                            <p>Your booking BC123455 has been cancelled. Refund will be processed within 3-5 business days.</p>
+                            <span class="notification-time">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Route Planner Section -->
+        <section id="route-planner" class="route-planner-section" style="display: none;">
+            <div class="container">
+                <h2>Interactive Route Planner</h2>
+                <p>Plan your bus journey with real-time traffic updates and alternative routes</p>
+
+                <div class="planner-container">
+                    <div class="planner-controls">
+                        <div class="route-inputs">
+                            <div class="input-group">
+                                <label>From</label>
+                                <input type="text" id="route-from" placeholder="Enter starting point" class="form-input">
+                                <div id="from-suggestions" class="suggestions"></div>
+                            </div>
+                            <div class="input-group">
+                                <label>To</label>
+                                <input type="text" id="route-to" placeholder="Enter destination" class="form-input">
+                                <div id="to-suggestions" class="suggestions"></div>
+                            </div>
+                            <div class="input-group">
+                                <label>Travel Date</label>
+                                <input type="date" id="route-date" class="form-input">
+                            </div>
+                            <button class="btn btn-primary" onclick="planRoute()">Plan Route</button>
+                        </div>
+                        
+                        <div class="waypoints-section">
+                            <h4>Add Waypoints</h4>
+                            <div id="waypoints-list"></div>
+                            <button class="btn btn-secondary" onclick="addWaypoint()">+ Add Stop</button>
+                        </div>
+                    </div>
+
+                    <div class="map-container">
+                        <div id="route-map" class="route-map">
+                            <div class="map-placeholder">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <p>Interactive map will appear here</p>
+                                <small>Enter start and end points to view route</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="route-results" id="route-results" style="display: none;">
+                    <h3>Suggested Routes</h3>
+                    <div class="routes-list">
+                        <div class="route-option">
+                            <div class="route-header">
+                                <h4>Route 1: Direct Route</h4>
+                                <span class="route-time">8h 30m</span>
+                            </div>
+                            <div class="route-details">
+                                <div class="route-info">
+                                    <span><i class="fas fa-clock"></i> Duration: 8h 30m</span>
+                                    <span><i class="fas fa-road"></i> Distance: 485 km</span>
+                                    <span><i class="fas fa-rupee-sign"></i> Est. Cost: ₹800-1200</span>
+                                </div>
+                                <div class="traffic-status">
+                                    <span class="traffic-light"><i class="fas fa-circle"></i> Light Traffic</span>
+                                </div>
+                            </div>
+                            <div class="route-stops">
+                                <strong>Major Stops:</strong> Pune, Kolhapur, Belgaum
+                            </div>
+                            <button class="btn btn-outline" onclick="selectRoute(1)">Select Route</button>
+                        </div>
+
+                        <div class="route-option">
+                            <div class="route-header">
+                                <h4>Route 2: Scenic Route</h4>
+                                <span class="route-time">9h 15m</span>
+                            </div>
+                            <div class="route-details">
+                                <div class="route-info">
+                                    <span><i class="fas fa-clock"></i> Duration: 9h 15m</span>
+                                    <span><i class="fas fa-road"></i> Distance: 520 km</span>
+                                    <span><i class="fas fa-rupee-sign"></i> Est. Cost: ₹750-1100</span>
+                                </div>
+                                <div class="traffic-status">
+                                    <span class="traffic-moderate"><i class="fas fa-circle"></i> Moderate Traffic</span>
+                                </div>
+                            </div>
+                            <div class="route-stops">
+                                <strong>Major Stops:</strong> Lonavala, Satara, Sangli
+                            </div>
+                            <button class="btn btn-outline" onclick="selectRoute(2)">Select Route</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notification Settings Modal -->
+        <div id="notification-settings-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Notification Preferences</h3>
+                    <span class="close" onclick="closeNotificationSettings()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="notification-channels">
+                        <h4>Notification Channels</h4>
+                        <div class="channel-options">
+                            <label class="channel-option">
+                                <input type="checkbox" id="email-notifications" checked>
+                                <span class="checkmark"></span>
+                                <div class="channel-info">
+                                    <strong>Email Notifications</strong>
+                                    <p>Receive notifications via email</p>
+                                </div>
+                            </label>
+                            <label class="channel-option">
+                                <input type="checkbox" id="sms-notifications" checked>
+                                <span class="checkmark"></span>
+                                <div class="channel-info">
+                                    <strong>SMS Notifications</strong>
+                                    <p>Receive notifications via SMS</p>
+                                </div>
+                            </label>
+                            <label class="channel-option">
+                                <input type="checkbox" id="push-notifications" checked>
+                                <span class="checkmark"></span>
+                                <div class="channel-info">
+                                    <strong>Push Notifications</strong>
+                                    <p>Receive browser push notifications</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="notification-types">
+                        <h4>Notification Types</h4>
+                        <div class="type-options">
+                            <label class="type-option">
+                                <input type="checkbox" id="booking-confirmations" checked>
+                                <span class="checkmark"></span>
+                                Booking Confirmations
+                            </label>
+                            <label class="type-option">
+                                <input type="checkbox" id="cancellation-alerts" checked>
+                                <span class="checkmark"></span>
+                                Cancellation Alerts
+                            </label>
+                            <label class="type-option">
+                                <input type="checkbox" id="travel-reminders" checked>
+                                <span class="checkmark"></span>
+                                Travel Reminders
+                            </label>
+                            <label class="type-option">
+                                <input type="checkbox" id="promotional-offers" checked>
+                                <span class="checkmark"></span>
+                                Promotional Offers
+                            </label>
+                            <label class="type-option">
+                                <input type="checkbox" id="route-updates" checked>
+                                <span class="checkmark"></span>
+                                Route Updates
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <h4>Contact Information</h4>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" value="user@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-control" value="+91 9876543210">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeNotificationSettings()">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveNotificationSettings()">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- AngularJS Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/mainController.js"></script>
+    <script src="js/services/notificationService.js"></script>
+    <script src="js/i18n.js"></script>
+    
+    <script>
+        // Fallback JavaScript function
+        function showSection(section) {
+            console.log('Showing section:', section);
+            
+            // Hide all sections
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(s) {
+                s.style.display = 'none';
+            });
+            
+            // Show selected section
+            var targetSection = document.getElementById(section);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            } else {
+                console.error('Section not found:', section);
+            }
+            
+            return false;
+        }
+        
+        // Search buses function
+        function searchBuses() {
+            // Get form values
+            var fromCity = document.getElementById('fromCity').value.trim();
+            var toCity = document.getElementById('toCity').value.trim();
+            var departureDate = document.getElementById('departureDate').value;
+            
+            // Validate required fields
+            if (!fromCity) {
+                alert(t('enter_departure'));
+                document.getElementById('fromCity').focus();
+                return false;
+            }
+            
+            if (!toCity) {
+                alert(t('enter_destination'));
+                document.getElementById('toCity').focus();
+                return false;
+            }
+            
+            if (!departureDate) {
+                alert(t('select_date'));
+                document.getElementById('departureDate').focus();
+                return false;
+            }
+            
+            // Update search summary with user input
+            var searchSummary = document.querySelector('.search-summary p');
+            if (searchSummary) {
+                var formattedDate = new Date(departureDate).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric'
+                });
+                searchSummary.textContent = fromCity + ' to ' + toCity + ' • ' + formattedDate + ' • 1 Passenger';
+            }
+            
+            console.log('Searching buses from', fromCity, 'to', toCity, 'on', departureDate);
+            showSection('search-results');
+            return false;
+        }
+        
+        // Seat selection variables
+        var selectedSeats = [];
+        var seatPrice = 0;
+        
+        // Show seat selection
+        function showSeatSelection(busName, price) {
+            seatPrice = price;
+            document.getElementById('selected-bus-name').textContent = busName + ' - Select Your Seats';
+            generateSeats();
+            showSection('seat-selection');
+        }
+        
+        // Generate seat layout
+        function generateSeats() {
+            var container = document.getElementById('seats-container');
+            container.innerHTML = '';
+            selectedSeats = [];
+            
+            // Create 40 seats (10 rows x 4 seats)
+            for (var row = 1; row <= 10; row++) {
+                var rowDiv = document.createElement('div');
+                rowDiv.className = 'seat-row';
+                
+                for (var col = 1; col <= 4; col++) {
+                    var seatNum = ((row - 1) * 4) + col;
+                    var seat = document.createElement('div');
+                    seat.className = 'seat';
+                    seat.id = 'seat-' + seatNum;
+                    seat.textContent = seatNum;
+                    
+                    // Randomly make some seats booked
+                    if (Math.random() < 0.3) {
+                        seat.classList.add('booked');
+                    } else {
+                        seat.classList.add('available');
+                        seat.onclick = function() { toggleSeat(this); };
+                    }
+                    
+                    rowDiv.appendChild(seat);
+                    
+                    // Add aisle space after 2nd seat
+                    if (col === 2) {
+                        var aisle = document.createElement('div');
+                        aisle.className = 'aisle';
+                        rowDiv.appendChild(aisle);
+                    }
+                }
+                
+                container.appendChild(rowDiv);
+            }
+            
+            updateSummary();
+        }
+        
+        // Toggle seat selection
+        function toggleSeat(seat) {
+            var seatNum = parseInt(seat.textContent);
+            
+            if (seat.classList.contains('selected')) {
+                seat.classList.remove('selected');
+                seat.classList.add('available');
+                selectedSeats = selectedSeats.filter(function(s) { return s !== seatNum; });
+            } else if (seat.classList.contains('available')) {
+                seat.classList.remove('available');
+                seat.classList.add('selected');
+                selectedSeats.push(seatNum);
+            }
+            
+            updateSummary();
+        }
+        
+        // Update booking summary
+        function updateSummary() {
+            var seatNumbers = document.getElementById('selected-seat-numbers');
+            var totalAmount = document.getElementById('total-amount');
+            var proceedBtn = document.getElementById('proceed-btn');
+            
+            if (selectedSeats.length > 0) {
+                seatNumbers.textContent = selectedSeats.sort(function(a, b) { return a - b; }).join(', ');
+                totalAmount.textContent = (selectedSeats.length * seatPrice).toLocaleString();
+                proceedBtn.disabled = false;
+            } else {
+                seatNumbers.textContent = 'None';
+                totalAmount.textContent = '0';
+                proceedBtn.disabled = true;
+            }
+        }
+        
+        // Proceed to payment
+        function proceedToPayment() {
+            if (selectedSeats.length === 0) {
+                alert('Please select at least one seat');
+                return;
+            }
+            
+            // Update payment details
+            var busName = document.getElementById('selected-bus-name').textContent.split(' - ')[0];
+            document.getElementById('payment-bus-name').textContent = busName;
+            document.getElementById('payment-seats').textContent = selectedSeats.join(', ');
+            document.getElementById('payment-total').textContent = '₹' + (selectedSeats.length * seatPrice).toLocaleString();
+            
+            showSection('payment');
+        }
+        
+        // Process payment
+        function processPayment() {
+            processPaymentWithNotifications();
+        }
+        
+        // Dark mode functionality
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            var isDark = document.body.classList.contains('dark-mode');
+            var toggle = document.getElementById('dark-mode-toggle');
+            
+            if (isDark) {
+                toggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                toggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+        
+        // Initialize dark mode
+        function initializeDarkMode() {
+            var darkMode = localStorage.getItem('darkMode');
+            var toggle = document.getElementById('dark-mode-toggle');
+            
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                toggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+        
+        // Review system variables
+        var selectedRating = 0;
+        
+        // Show reviews for a bus
+        function showReviews(busName) {
+            document.getElementById('reviews-bus-name').textContent = busName + ' Reviews';
+            showSection('reviews');
+        }
+        
+        // Show route reviews
+        function showRouteReviews(routeName) {
+            document.getElementById('reviews-bus-name').textContent = routeName + ' Route Reviews';
+            showSection('reviews');
+        }
+        
+        // Community functions
+        function showCommunitySection(type) {
+            if (type === 'groups') {
+                showSection('community-groups');
+            } else if (type === 'routes') {
+                showSection('community-routes');
+            } else if (type === 'discussions') {
+                showSection('community-discussions');
+            }
+        }
+        
+        function showNewDiscussion() {
+            // Clear form
+            document.getElementById('discussion-author').value = '';
+            document.getElementById('discussion-title').value = '';
+            document.getElementById('discussion-content').value = '';
+            document.getElementById('discussion-category').value = 'general';
+            
+            showSection('new-discussion');
+        }
+        
+        function submitDiscussion() {
+            var author = document.getElementById('discussion-author').value.trim();
+            var title = document.getElementById('discussion-title').value.trim();
+            var content = document.getElementById('discussion-content').value.trim();
+            var category = document.getElementById('discussion-category').value;
+            
+            if (!author || !title || !content) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Add new discussion to the list
+            var discussionsList = document.querySelector('.discussions-list');
+            var newDiscussion = document.createElement('div');
+            newDiscussion.className = 'discussion-item';
+            newDiscussion.innerHTML = `
+                <div class="discussion-header">
+                    <h3>${title}</h3>
+                    <span class="discussion-time">Just now</span>
+                </div>
+                <p>${content}</p>
+                <div class="discussion-meta">
+                    <span><i class="fas fa-user"></i> Asked by ${author}</span>
+                    <span><i class="fas fa-comments"></i> 0 replies</span>
+                    <span><i class="fas fa-thumbs-up"></i> 0 likes</span>
+                </div>
+            `;
+            
+            discussionsList.insertBefore(newDiscussion, discussionsList.firstChild);
+            
+            alert('Discussion posted successfully! Other travelers can now see and respond to your question.');
+            showCommunitySection('discussions');
+        }
+        
+        // Show review form
+        function showReviewForm() {
+            selectedRating = 0;
+            document.getElementById('reviewer-name').value = '';
+            document.getElementById('review-text').value = '';
+            resetStarRating();
+            showSection('review-form');
+        }
+        
+        // Set star rating
+        function setRating(rating) {
+            selectedRating = rating;
+            var stars = document.querySelectorAll('#star-rating i');
+            
+            stars.forEach(function(star, index) {
+                if (index < rating) {
+                    star.className = 'fas fa-star';
+                } else {
+                    star.className = 'far fa-star';
+                }
+            });
+        }
+        
+        // Reset star rating
+        function resetStarRating() {
+            var stars = document.querySelectorAll('#star-rating i');
+            stars.forEach(function(star) {
+                star.className = 'far fa-star';
+            });
+        }
+        
+        // Submit review
+        function submitReview() {
+            var name = document.getElementById('reviewer-name').value.trim();
+            var reviewText = document.getElementById('review-text').value.trim();
+            
+            if (!name || !reviewText || selectedRating === 0) {
+                alert('Please fill all fields and select a rating');
+                return;
+            }
+            
+            alert('Thank you for your review! Your feedback helps other travelers.');
+            showSection('reviews');
+        }
+        
+        // Story details data
+        var storyData = {
+            'goa-journey': {
+                title: 'Amazing Journey to Goa',
+                author: 'Priya Sharma',
+                route: 'Mumbai → Goa',
+                image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=400&fit=crop',
+                content: `<p>The journey from Mumbai to Goa was absolutely incredible. The coastal views were breathtaking, and the bus was comfortable throughout the 12-hour journey.</p>
+                         <p>We started our journey at 10 PM from Mumbai Central. The bus was a Volvo AC sleeper, and I was impressed by how clean and well-maintained it was. The seats were comfortable, and there was enough legroom.</p>
+                         <p>As we traveled through the night, I could see the landscape changing from the bustling city to peaceful countryside. The early morning views of the Western Ghats were spectacular.</p>
+                         <p>What made this journey special was meeting fellow travelers. I made friends with a couple from Delhi who were also visiting Goa for the first time. We shared travel tips and even planned to explore some beaches together.</p>
+                         <p>The bus made a couple of stops for refreshments, and the driver was very courteous and professional. We reached Goa right on time at 10 AM, feeling fresh and ready to explore the beautiful beaches.</p>
+                         <p>I would definitely recommend this route to anyone looking for a comfortable and scenic way to reach Goa. The journey itself becomes part of the vacation experience!</p>`
+            },
+            'manali-adventure': {
+                title: 'Mountain Adventure to Manali',
+                author: 'Arjun Patel',
+                route: 'Delhi → Manali',
+                image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&h=400&fit=crop',
+                content: `<p>The Delhi to Manali route is a must-do for any mountain lover. The changing landscapes from plains to hills to snow-capped peaks is mesmerizing.</p>
+                         <p>Our adventure began at 6 PM from Delhi. The initial part of the journey took us through the busy highways of Haryana and Punjab. But as we entered Himachal Pradesh, the real magic began.</p>
+                         <p>The winding mountain roads, the fresh mountain air, and the gradually changing scenery kept me glued to the window. The bus driver was experienced with mountain driving, which made the journey safe and comfortable.</p>
+                         <p>We stopped at a small dhaba in Mandi for breakfast, where we enjoyed hot parathas and tea while watching the sunrise over the mountains. The local hospitality was heartwarming.</p>
+                         <p>As we climbed higher, we could see snow-capped peaks in the distance. The temperature dropped, and the air became crisp and refreshing. Fellow passengers were equally excited, and there was a sense of shared adventure.</p>
+                         <p>Reaching Manali after 14 hours felt like entering a different world. The journey was as memorable as the destination itself. I can't wait to do this trip again!</p>`
+            },
+            'rajasthan-budget': {
+                title: 'Budget Trip to Rajasthan',
+                author: 'Vikram Singh',
+                route: 'Jaipur → Udaipur',
+                image: 'https://images.unsplash.com/photo-1477587458883-47145ed94245?w=800&h=400&fit=crop',
+                content: `<p>Traveled from Jaipur to Udaipur on a budget-friendly bus. The journey through Rajasthan countryside was amazing with traditional villages and historic forts.</p>
+                         <p>As a student on a tight budget, I was looking for the most economical way to travel from Jaipur to Udaipur. The government bus service turned out to be perfect for my needs.</p>
+                         <p>The 8-hour journey cost me only ₹200, which left me with more money to spend on exploring Udaipur. The bus wasn't luxurious, but it was clean and the seats were comfortable enough.</p>
+                         <p>What made this journey special was the route through rural Rajasthan. We passed through small villages where I could see traditional Rajasthani architecture, colorful turbans, and women in vibrant sarees.</p>
+                         <p>The bus made several stops at small towns, giving me glimpses of local life. I saw ancient havelis, stepped wells, and even caught sight of a few peacocks in the fields.</p>
+                         <p>Fellow passengers were mostly locals who were very friendly and shared stories about their villages. One elderly gentleman told me about the best places to visit in Udaipur, which proved very helpful.</p>
+                         <p>This budget journey taught me that sometimes the most economical option can also be the most enriching. I experienced the real Rajasthan that tourists often miss!</p>`
+            }
+        };
+        
+        // Show story detail
+        function showStoryDetail(storyId) {
+            var story = storyData[storyId];
+            if (story) {
+                document.getElementById('story-detail-title').textContent = story.title;
+                document.getElementById('story-detail-author').innerHTML = '<i class="fas fa-user"></i> ' + story.author;
+                document.getElementById('story-detail-route').innerHTML = '<i class="fas fa-route"></i> ' + story.route;
+                document.getElementById('story-detail-image').src = story.image;
+                document.getElementById('story-detail-text').innerHTML = story.content;
+                showSection('story-detail');
+            }
+        }
+        
+        // Like story
+        function likeStory() {
+            var likeCount = document.getElementById('like-count');
+            var currentLikes = parseInt(likeCount.textContent);
+            likeCount.textContent = currentLikes + 1;
+        }
+        
+        // Share story
+        function shareStory() {
+            alert('Story shared! (In a real app, this would open sharing options)');
+        }
+        
+        // Story submission functions
+        function previewStory() {
+            var title = document.getElementById('story-title').value.trim();
+            var author = document.getElementById('story-author').value.trim();
+            var route = document.getElementById('story-route').value.trim();
+            var date = document.getElementById('story-date').value;
+            var category = document.getElementById('story-category').value;
+            var content = document.getElementById('story-content').value.trim();
+            var imageUrl = document.getElementById('story-image').value.trim();
+            
+            if (!title || !author || !route || !date || !content) {
+                alert('Please fill in all required fields before previewing.');
+                return;
+            }
+            
+            // Update preview content
+            document.getElementById('preview-title').textContent = title;
+            document.getElementById('preview-author').innerHTML = '<i class="fas fa-user"></i> ' + author;
+            document.getElementById('preview-route').innerHTML = '<i class="fas fa-route"></i> ' + route;
+            
+            var formattedDate = new Date(date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('preview-date').innerHTML = '<i class="fas fa-calendar"></i> ' + formattedDate;
+            
+            var categoryNames = {
+                'adventure': 'Adventure',
+                'budget': 'Budget Travel',
+                'scenic': 'Scenic Routes',
+                'tips': 'Travel Tips'
+            };
+            document.getElementById('preview-category').textContent = categoryNames[category];
+            
+            // Format content with paragraphs
+            var formattedContent = content.split('\n').map(function(paragraph) {
+                return paragraph.trim() ? '<p>' + paragraph.trim() + '</p>' : '';
+            }).join('');
+            document.getElementById('preview-content').innerHTML = formattedContent || '<p>' + content + '</p>';
+            
+            // Set image
+            var previewImg = document.getElementById('preview-image');
+            if (imageUrl) {
+                previewImg.src = imageUrl;
+            } else {
+                previewImg.src = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=400&fit=crop';
+            }
+            
+            showSection('story-preview');
+        }
+        
+        function submitStory() {
+            var title = document.getElementById('story-title').value.trim();
+            var author = document.getElementById('story-author').value.trim();
+            var route = document.getElementById('story-route').value.trim();
+            var date = document.getElementById('story-date').value;
+            var content = document.getElementById('story-content').value.trim();
+            
+            if (!title || !author || !route || !date || !content) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            previewStory(); // Show preview first
+        }
+        
+        function publishStory() {
+            alert('Story published successfully! Thank you for sharing your travel experience. Your story will be reviewed and added to our community stories.');
+            
+            // Clear form
+            document.getElementById('story-title').value = '';
+            document.getElementById('story-author').value = '';
+            document.getElementById('story-route').value = '';
+            document.getElementById('story-date').value = '';
+            document.getElementById('story-content').value = '';
+            document.getElementById('story-image').value = '';
+            
+            showSection('stories');
+        }
+        
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            var navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+        
+        // Notification system functions
+        function showNotificationSettings() {
+            document.getElementById('notification-settings-modal').style.display = 'block';
+        }
+        
+        function closeNotificationSettings() {
+            document.getElementById('notification-settings-modal').style.display = 'none';
+        }
+        
+        function saveNotificationSettings() {
+            var emailEnabled = document.getElementById('email-notifications').checked;
+            var smsEnabled = document.getElementById('sms-notifications').checked;
+            var pushEnabled = document.getElementById('push-notifications').checked;
+            
+            var bookingConfirmations = document.getElementById('booking-confirmations').checked;
+            var cancellationAlerts = document.getElementById('cancellation-alerts').checked;
+            var travelReminders = document.getElementById('travel-reminders').checked;
+            var promotionalOffers = document.getElementById('promotional-offers').checked;
+            var routeUpdates = document.getElementById('route-updates').checked;
+            
+            // Save preferences
+            var preferences = {
+                channels: {
+                    email: emailEnabled,
+                    sms: smsEnabled,
+                    push: pushEnabled
+                },
+                types: {
+                    bookingConfirmations: bookingConfirmations,
+                    cancellationAlerts: cancellationAlerts,
+                    travelReminders: travelReminders,
+                    promotionalOffers: promotionalOffers,
+                    routeUpdates: routeUpdates
+                }
+            };
+            
+            localStorage.setItem('notificationPreferences', JSON.stringify(preferences));
+            notificationService.preferences = preferences;
+            
+            // Request push notification permission if enabled
+            if (pushEnabled && 'Notification' in window) {
+                Notification.requestPermission();
+            }
+            
+            // Save contact info
+            var email = document.querySelector('.contact-info input[type="email"]').value;
+            var phone = document.querySelector('.contact-info input[type="tel"]').value;
+            if (email) localStorage.setItem('userEmail', email);
+            if (phone) localStorage.setItem('userPhone', phone);
+            
+            alert('Notification preferences saved successfully!');
+            closeNotificationSettings();
+        }
+        
+        function markAllRead() {
+            notificationService.markAllAsRead();
+            alert('All notifications marked as read!');
+        }
+        
+        // Send notification function
+        function sendNotification(type, title, message) {
+            var preferences = JSON.parse(localStorage.getItem('notificationPreferences') || '{}');
+            
+            // Check if notification type is enabled
+            if (preferences.types && !preferences.types[type]) {
+                return;
+            }
+            
+            // Send push notification
+            if (preferences.channels && preferences.channels.push && 'Notification' in window && Notification.permission === 'granted') {
+                new Notification(title, {
+                    body: message,
+                    icon: '/favicon.ico'
+                });
+            }
+            
+            // Add to notification list
+            addNotificationToList(type, title, message);
+        }
+        
+        function addNotificationToList(type, title, message) {
+            var notificationsList = document.querySelector('.notifications-list');
+            var iconClass = {
+                'bookingConfirmations': 'fas fa-ticket-alt',
+                'cancellationAlerts': 'fas fa-times-circle',
+                'travelReminders': 'fas fa-clock',
+                'promotionalOffers': 'fas fa-gift',
+                'routeUpdates': 'fas fa-route'
+            };
+            
+            var notificationItem = document.createElement('div');
+            notificationItem.className = 'notification-item unread';
+            notificationItem.innerHTML = `
+                <div class="notification-icon ${type}">
+                    <i class="${iconClass[type] || 'fas fa-bell'}"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>${title}</h4>
+                    <p>${message}</p>
+                    <span class="notification-time">Just now</span>
+                </div>
+            `;
+            
+            notificationsList.insertBefore(notificationItem, notificationsList.firstChild);
+        }
+        
+        // Initialize notification system
+        function initializeNotifications() {
+            // Load notification UI
+            setTimeout(function() {
+                if (notificationService) {
+                    notificationService.updateNotificationUI();
+                    
+                    // Load saved preferences
+                    var preferences = notificationService.preferences;
+                    if (preferences.channels) {
+                        document.getElementById('email-notifications').checked = preferences.channels.email !== false;
+                        document.getElementById('sms-notifications').checked = preferences.channels.sms !== false;
+                        document.getElementById('push-notifications').checked = preferences.channels.push !== false;
+                    }
+                    if (preferences.types) {
+                        document.getElementById('booking-confirmations').checked = preferences.types.bookingConfirmations !== false;
+                        document.getElementById('cancellation-alerts').checked = preferences.types.cancellationAlerts !== false;
+                        document.getElementById('travel-reminders').checked = preferences.types.travelReminders !== false;
+                        document.getElementById('promotional-offers').checked = preferences.types.promotionalOffers !== false;
+                        document.getElementById('route-updates').checked = preferences.types.routeUpdates !== false;
+                    }
+                }
+            }, 100);
+        }
+        
+        // Enhanced payment processing with notifications
+        function processPaymentWithNotifications() {
+            var name = document.getElementById('passenger-name').value.trim();
+            var mobile = document.getElementById('mobile-number').value.trim();
+            var email = document.getElementById('email').value.trim();
+            
+            if (!name || !mobile || !email) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            // Store user contact info
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPhone', mobile);
+            
+            var btn = event.target;
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+            
+            setTimeout(function() {
+                var bookingId = 'BC' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                var totalAmount = selectedSeats.length * seatPrice;
+                var busName = document.getElementById('selected-bus-name').textContent.split(' - ')[0];
+                var route = document.querySelector('.search-summary p').textContent.split(' • ')[0];
+                
+                // Send booking confirmation notification
+                notificationService.sendNotification('bookingConfirmations', 'Booking Confirmed', 
+                    `Your booking for ${route} on ${busName} has been confirmed. Seats: ${selectedSeats.join(', ')}. Amount: ₹${totalAmount.toLocaleString()}`, 
+                    { bookingId: bookingId, seats: selectedSeats, amount: totalAmount });
+                
+                alert('Payment Successful!\n\nBooking ID: ' + bookingId + '\nSeats: ' + selectedSeats.join(', ') + '\nAmount: ₹' + totalAmount.toLocaleString());
+                
+                // Schedule travel reminder for 2 hours before departure
+                var departureTime = new Date();
+                departureTime.setHours(departureTime.getHours() + 10); // Simulate 10 hours from now
+                var reminderTime = new Date(departureTime.getTime() - 2 * 60 * 60 * 1000); // 2 hours before
+                
+                notificationService.scheduleReminder({
+                    bookingId: bookingId,
+                    route: route,
+                    busName: busName
+                }, reminderTime);
+                
+                // Send promotional offer after 10 seconds (demo)
+                setTimeout(function() {
+                    notificationService.sendPromotionalOffer({
+                        title: 'Special Offer',
+                        message: 'Get 20% off on your next booking! Use code SAVE20. Valid till Dec 31, 2024.',
+                        code: 'SAVE20',
+                        validTill: '2024-12-31'
+                    });
+                }, 10000);
+                
+                // Reset form
+                document.getElementById('passenger-name').value = '';
+                document.getElementById('mobile-number').value = '';
+                document.getElementById('email').value = '';
+                btn.disabled = false;
+                btn.textContent = 'Pay Now';
+                
+                showSection('home');
+            }, 2000);
+        }
+        
+        // Travel tips data
+        var tipsData = {
+            'advance-booking': {
+                title: 'Book in Advance',
+                image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=400&fit=crop',
+                content: `<h3>Why Book in Advance?</h3>
+                         <p>Booking your bus tickets 2-3 days in advance offers several advantages that can significantly improve your travel experience.</p>
+                         
+                         <h4>Better Seat Selection</h4>
+                         <p>Early booking gives you access to the best seats in the bus. You can choose window seats, aisle seats, or seats away from the restroom based on your preference.</p>
+                         
+                         <h4>Lower Prices</h4>
+                         <p>Many bus operators offer early bird discounts for advance bookings. You can save 10-20% on your ticket price by booking early.</p>
+                         
+                         <h4>Guaranteed Availability</h4>
+                         <p>Popular routes often get fully booked, especially during peak seasons. Advance booking ensures you don't miss out on your preferred travel date.</p>
+                         
+                         <h4>Best Practices</h4>
+                         <ul>
+                           <li>Book 2-3 days in advance for regular routes</li>
+                           <li>Book 1-2 weeks ahead for festival seasons</li>
+                           <li>Set price alerts for your preferred routes</li>
+                           <li>Compare prices across different operators</li>
+                         </ul>`
+            },
+            'safety-tips': {
+                title: 'Safety First',
+                image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=400&fit=crop',
+                content: `<h3>Essential Safety Tips for Bus Travel</h3>
+                         <p>Your safety is paramount when traveling by bus. Follow these essential tips to ensure a secure journey.</p>
+                         
+                         <h4>Before You Travel</h4>
+                         <ul>
+                           <li>Share your travel details with family or friends</li>
+                           <li>Keep emergency contacts handy</li>
+                           <li>Verify the bus operator's credentials</li>
+                           <li>Check the bus condition before boarding</li>
+                         </ul>
+                         
+                         <h4>During the Journey</h4>
+                         <ul>
+                           <li>Keep your belongings secure and within sight</li>
+                           <li>Avoid displaying expensive items</li>
+                           <li>Stay alert during stops</li>
+                           <li>Trust your instincts if something feels wrong</li>
+                         </ul>
+                         
+                         <h4>Emergency Preparedness</h4>
+                         <ul>
+                           <li>Keep emergency numbers saved in your phone</li>
+                           <li>Carry a basic first aid kit</li>
+                           <li>Know the location of emergency exits</li>
+                           <li>Keep some cash for emergencies</li>
+                         </ul>`
+            },
+            'packing-light': {
+                title: 'Pack Light',
+                image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&h=400&fit=crop',
+                content: `<h3>The Art of Packing Light</h3>
+                         <p>Traveling light makes your bus journey more comfortable and hassle-free. Here's how to pack smart.</p>
+                         
+                         <h4>Essential Items Only</h4>
+                         <ul>
+                           <li>Pack only what you absolutely need</li>
+                           <li>Choose versatile clothing items</li>
+                           <li>Limit yourself to 2-3 pairs of shoes</li>
+                           <li>Use packing cubes to organize efficiently</li>
+                         </ul>
+                         
+                         <h4>Smart Packing Tips</h4>
+                         <ul>
+                           <li>Roll clothes instead of folding</li>
+                           <li>Use every inch of space in your bag</li>
+                           <li>Wear your heaviest items while traveling</li>
+                           <li>Leave room for souvenirs</li>
+                         </ul>
+                         
+                         <h4>What to Avoid</h4>
+                         <ul>
+                           <li>Multiple bags that are hard to manage</li>
+                           <li>Valuable items that you can't afford to lose</li>
+                           <li>Excessive electronics and chargers</li>
+                           <li>Too many "just in case" items</li>
+                         </ul>`
+            },
+            'stay-connected': {
+                title: 'Stay Connected',
+                image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop',
+                content: `<h3>Staying Connected During Your Journey</h3>
+                         <p>Maintaining connectivity during long bus journeys is essential for safety, entertainment, and communication.</p>
+                         
+                         <h4>Power Management</h4>
+                         <ul>
+                           <li>Carry a high-capacity power bank (10,000mAh or more)</li>
+                           <li>Bring multiple charging cables</li>
+                           <li>Use power-saving mode on your devices</li>
+                           <li>Look for buses with charging ports</li>
+                         </ul>
+                         
+                         <h4>Internet Connectivity</h4>
+                         <ul>
+                           <li>Download offline maps before traveling</li>
+                           <li>Save entertainment content for offline viewing</li>
+                           <li>Consider a portable WiFi hotspot</li>
+                           <li>Check your mobile data plan coverage</li>
+                         </ul>
+                         
+                         <h4>Communication Tips</h4>
+                         <ul>
+                           <li>Share your live location with family</li>
+                           <li>Keep important contacts easily accessible</li>
+                           <li>Use messaging apps that work with poor connectivity</li>
+                           <li>Inform others about your expected arrival time</li>
+                         </ul>`
+            },
+            'budget-travel': {
+                title: 'Budget Travel',
+                image: 'https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800&h=400&fit=crop',
+                content: `<h3>Smart Budget Travel Tips</h3>
+                         <p>Traveling on a budget doesn't mean compromising on comfort. Here are proven ways to save money on bus travel.</p>
+                         
+                         <h4>Booking Strategies</h4>
+                         <ul>
+                           <li>Compare prices across multiple platforms</li>
+                           <li>Look for promotional offers and discount codes</li>
+                           <li>Consider traveling during off-peak hours</li>
+                           <li>Book round-trip tickets for better deals</li>
+                         </ul>
+                         
+                         <h4>Food and Refreshments</h4>
+                         <ul>
+                           <li>Pack your own snacks and water</li>
+                           <li>Avoid expensive food at bus stops</li>
+                           <li>Look for local eateries instead of tourist spots</li>
+                           <li>Carry a reusable water bottle</li>
+                         </ul>
+                         
+                         <h4>Accommodation Savings</h4>
+                         <ul>
+                           <li>Choose overnight buses to save on hotel costs</li>
+                           <li>Book budget accommodations in advance</li>
+                           <li>Consider shared accommodations</li>
+                           <li>Look for package deals that include transport</li>
+                         </ul>`
+            },
+            'comfort-tips': {
+                title: 'Travel Comfort',
+                image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=400&fit=crop',
+                content: `<h3>Maximizing Comfort During Bus Travel</h3>
+                         <p>Long bus journeys can be comfortable with the right preparation and mindset. Here's how to make your trip enjoyable.</p>
+                         
+                         <h4>Seating Comfort</h4>
+                         <ul>
+                           <li>Choose seats with extra legroom when possible</li>
+                           <li>Bring a neck pillow and blanket</li>
+                           <li>Wear comfortable, loose-fitting clothes</li>
+                           <li>Consider aisle seats for easier movement</li>
+                         </ul>
+                         
+                         <h4>Entertainment and Rest</h4>
+                         <ul>
+                           <li>Download movies, music, or podcasts beforehand</li>
+                           <li>Bring noise-canceling headphones</li>
+                           <li>Pack an eye mask for better sleep</li>
+                           <li>Carry a good book or e-reader</li>
+                         </ul>
+                         
+                         <h4>Health and Wellness</h4>
+                         <ul>
+                           <li>Stay hydrated but don't overdrink</li>
+                           <li>Do simple stretches during stops</li>
+                           <li>Take motion sickness medication if needed</li>
+                           <li>Maintain good posture while seated</li>
+                         </ul>`
+            }
+        };
+        
+        // Show tip detail
+        function showTipDetail(tipId) {
+            var tip = tipsData[tipId];
+            if (tip) {
+                document.getElementById('tip-detail-title').textContent = tip.title;
+                document.getElementById('tip-detail-image').src = tip.image;
+                document.getElementById('tip-detail-content').innerHTML = tip.content;
+                showSection('tip-detail');
+            }
+        }
+        
+        // Like tip
+        function likeTip() {
+            var likeCount = document.getElementById('tip-like-count');
+            var currentLikes = parseInt(likeCount.textContent);
+            likeCount.textContent = currentLikes + 1;
+        }
+        
+        // Share tip
+        function shareTip() {
+            alert('Tip shared! (In a real app, this would open sharing options)');
+        }
+        
+        // Route planner variables
+        var waypoints = [];
+        var selectedRoute = null;
+        
+        // City suggestions for autocomplete
+        var cities = [
+            'Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune', 'Ahmedabad',
+            'Jaipur', 'Surat', 'Lucknow', 'Kanpur', 'Nagpur', 'Indore', 'Thane', 'Bhopal',
+            'Visakhapatnam', 'Pimpri-Chinchwad', 'Patna', 'Vadodara', 'Ghaziabad', 'Ludhiana',
+            'Agra', 'Nashik', 'Faridabad', 'Meerut', 'Rajkot', 'Kalyan-Dombivali', 'Vasai-Virar',
+            'Varanasi', 'Srinagar', 'Aurangabad', 'Dhanbad', 'Amritsar', 'Navi Mumbai', 'Allahabad',
+            'Ranchi', 'Howrah', 'Coimbatore', 'Jabalpur', 'Gwalior', 'Vijayawada', 'Jodhpur',
+            'Madurai', 'Raipur', 'Kota', 'Guwahati', 'Chandigarh', 'Solapur', 'Hubli-Dharwad',
+            'Bareilly', 'Moradabad', 'Mysore', 'Gurgaon', 'Aligarh', 'Jalandhar', 'Tiruchirappalli',
+            'Bhubaneswar', 'Salem', 'Mira-Bhayandar', 'Warangal', 'Thiruvananthapuram', 'Guntur',
+            'Bhiwandi', 'Saharanpur', 'Gorakhpur', 'Bikaner', 'Amravati', 'Noida', 'Jamshedpur',
+            'Bhilai Nagar', 'Cuttack', 'Firozabad', 'Kochi', 'Bhavnagar', 'Dehradun', 'Durgapur',
+            'Asansol', 'Nanded-Waghala', 'Kolhapur', 'Ajmer', 'Gulbarga', 'Jamnagar', 'Ujjain',
+            'Loni', 'Siliguri', 'Jhansi', 'Ulhasnagar', 'Nellore', 'Jammu', 'Sangli-Miraj & Kupwad',
+            'Belgaum', 'Mangalore', 'Ambattur', 'Tirunelveli', 'Malegaon', 'Gaya', 'Jalgaon',
+            'Udaipur', 'Maheshtala'
+        ];
+        
+        // Setup autocomplete for route inputs
+        function setupAutocomplete() {
+            var fromInput = document.getElementById('route-from');
+            var toInput = document.getElementById('route-to');
+            
+            fromInput.addEventListener('input', function() {
+                showSuggestions(this.value, 'from-suggestions');
+            });
+            
+            toInput.addEventListener('input', function() {
+                showSuggestions(this.value, 'to-suggestions');
+            });
+        }
+        
+        // Show city suggestions
+        function showSuggestions(query, containerId) {
+            var container = document.getElementById(containerId);
+            if (!query) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            var matches = cities.filter(function(city) {
+                return city.toLowerCase().includes(query.toLowerCase());
+            }).slice(0, 5);
+            
+            container.innerHTML = matches.map(function(city) {
+                return '<div class="suggestion-item" onclick="selectSuggestion(\'' + city + '\', \'' + containerId + '\')">'
+                    + city + '</div>';
+            }).join('');
+        }
+        
+        // Select suggestion
+        function selectSuggestion(city, containerId) {
+            var inputId = containerId.replace('-suggestions', '');
+            document.getElementById(inputId).value = city;
+            document.getElementById(containerId).innerHTML = '';
+        }
+        
+        // Add waypoint
+        function addWaypoint() {
+            var waypointsList = document.getElementById('waypoints-list');
+            var waypointIndex = waypoints.length;
+            
+            var waypointDiv = document.createElement('div');
+            waypointDiv.className = 'waypoint-item';
+            waypointDiv.innerHTML = `
+                <input type="text" placeholder="Add stop" class="form-input waypoint-input" 
+                       onchange="updateWaypoint(${waypointIndex}, this.value)">
+                <button class="btn-remove" onclick="removeWaypoint(${waypointIndex})">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            waypointsList.appendChild(waypointDiv);
+            waypoints.push('');
+        }
+        
+        // Update waypoint
+        function updateWaypoint(index, value) {
+            waypoints[index] = value;
+        }
+        
+        // Remove waypoint
+        function removeWaypoint(index) {
+            waypoints.splice(index, 1);
+            var waypointsList = document.getElementById('waypoints-list');
+            waypointsList.children[index].remove();
+        }
+        
+        // Plan route
+        function planRoute() {
+            var from = document.getElementById('route-from').value.trim();
+            var to = document.getElementById('route-to').value.trim();
+            var date = document.getElementById('route-date').value;
+            
+            if (!from || !to) {
+                alert('Please enter both starting point and destination');
+                return;
+            }
+            
+            // Show loading state
+            var mapContainer = document.querySelector('.map-placeholder');
+            mapContainer.innerHTML = `
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Planning your route...</p>
+                <small>Analyzing traffic and finding best options</small>
+            `;
+            
+            // Simulate route planning
+            setTimeout(function() {
+                // Update map
+                mapContainer.innerHTML = `
+                    <div class="route-display">
+                        <div class="route-line"></div>
+                        <div class="route-marker start">A</div>
+                        <div class="route-marker end">B</div>
+                        <div class="route-path">
+                            <strong>${from} → ${to}</strong>
+                            <p>Route planned successfully</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Show route results
+                document.getElementById('route-results').style.display = 'block';
+                
+                // Update route details with actual cities
+                var routeOptions = document.querySelectorAll('.route-option');
+                routeOptions[0].querySelector('h4').textContent = `Route 1: ${from} to ${to} (Direct)`;
+                routeOptions[1].querySelector('h4').textContent = `Route 2: ${from} to ${to} (Scenic)`;
+                
+            }, 2000);
+        }
+        
+        // Select route
+        function selectRoute(routeNumber) {
+            selectedRoute = routeNumber;
+            
+            // Update UI to show selected route
+            var routeOptions = document.querySelectorAll('.route-option');
+            routeOptions.forEach(function(option, index) {
+                if (index + 1 === routeNumber) {
+                    option.classList.add('selected');
+                    option.querySelector('.btn').textContent = 'Selected';
+                    option.querySelector('.btn').classList.add('btn-success');
+                } else {
+                    option.classList.remove('selected');
+                    option.querySelector('.btn').textContent = 'Select Route';
+                    option.querySelector('.btn').classList.remove('btn-success');
+                }
+            });
+            
+            // Show booking option
+            setTimeout(function() {
+                if (confirm('Route selected! Would you like to search for buses on this route?')) {
+                    // Pre-fill booking form
+                    document.getElementById('fromCity').value = document.getElementById('route-from').value;
+                    document.getElementById('toCity').value = document.getElementById('route-to').value;
+                    document.getElementById('departureDate').value = document.getElementById('route-date').value;
+                    
+                    showSection('booking');
+                }
+            }, 500);
+        }
+        
+        // Initialize route planner
+        function initializeRoutePlanner() {
+            setupAutocomplete();
+            
+            // Set default date to today
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById('route-date').value = today;
+        }
+        
+        // Show home section by default
+        window.onload = function() {
+            initializeLanguage();
+            initializeDarkMode();
+            initializeNotifications();
+            initializeRoutePlanner();
+            showSection('home');
+        };
+    </script>
+    
+</body>
+</html>

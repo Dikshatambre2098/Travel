@@ -1,0 +1,423 @@
+/* Community Section Styles */
+.feature-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.feature-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.feature-stats span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Community Detail Sections */
+.community-detail-section {
+    padding: 4rem 0;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.community-section {
+    padding: 4rem 0;
+    background: #f8f9fa;
+}
+
+.community-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.community-section p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.community-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.community-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.community-header h2 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+/* Groups Section */
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.group-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.group-info h3 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+}
+
+.group-info p {
+    margin: 0 0 1rem 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+.group-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.group-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Routes Section */
+.routes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.shared-route {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.route-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.route-header h3 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+.route-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.route-rating .stars {
+    display: flex;
+    gap: 2px;
+}
+
+.route-rating .stars i {
+    color: #ffc107;
+    font-size: 0.9rem;
+}
+
+.route-rating span {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.shared-route p {
+    margin: 0 0 1rem 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.route-details {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.route-details span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Discussions Section */
+.discussions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.discussion-item {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.discussion-item:hover {
+    transform: translateY(-2px);
+}
+
+.discussion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.discussion-header h3 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+.discussion-time {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.discussion-item p {
+    margin: 0 0 1rem 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.discussion-meta {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.discussion-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Dark Mode */
+.dark-mode .feature-stats {
+    border-top-color: #444;
+    color: #b0b0b0;
+}
+
+.dark-mode .group-card,
+.dark-mode .shared-route,
+.dark-mode .discussion-item {
+    background: #2d2d2d;
+    color: #e0e0e0;
+}
+
+.dark-mode .group-info h3,
+.dark-mode .route-header h3,
+.dark-mode .discussion-header h3 {
+    color: #e0e0e0;
+}
+
+.dark-mode .group-info p,
+.dark-mode .shared-route p,
+.dark-mode .discussion-item p {
+    color: #c0c0c0;
+}
+
+.dark-mode .group-meta,
+.dark-mode .route-details,
+.dark-mode .discussion-meta {
+    color: #b0b0b0;
+}
+
+/* New Discussion Form Styles */
+.new-discussion-section {
+    background: #f8f9fa;
+    padding: 4rem 0;
+    min-height: 80vh;
+}
+
+.discussion-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.form-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+/* Dark Mode Support */
+.dark-mode .new-discussion-section {
+    background: #1a1a1a;
+}
+
+.dark-mode .discussion-form {
+    background: #2d2d2d;
+}
+
+.dark-mode .form-header h2 {
+    color: #fff;
+}
+
+.dark-mode .form-group label {
+    color: #fff;
+}
+
+.dark-mode .form-input,
+.dark-mode .form-select,
+.dark-mode .form-textarea {
+    background: #333;
+    border-color: #444;
+    color: #fff;
+}
+
+.dark-mode .form-input::placeholder,
+.dark-mode .form-textarea::placeholder {
+    color: #999;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .community-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .groups-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .group-card {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .route-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .route-details {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .discussion-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .discussion-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .feature-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .form-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .discussion-form {
+        padding: 1.5rem;
+    }
+}

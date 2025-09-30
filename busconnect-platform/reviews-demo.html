@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="busConnectApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusConnect - Route Reviews Demo</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/reviews.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-light">
+    
+    <div class="demo-container">
+        <header style="padding: 20px; text-align: center; background: var(--bg-secondary);">
+            <h1>Mumbai to Pune Route Reviews</h1>
+            <p>See what travelers are saying about this popular route</p>
+        </header>
+        
+        <div ng-include="'views/route-reviews.html'" ng-init="init('route-1')"></div>
+    </div>
+    
+    <!-- AngularJS Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/services/reviewService.js"></script>
+    <script src="js/controllers/reviewController.js"></script>
+    <script src="js/directives/starRating.js"></script>
+    
+    <script>
+        // Mock HTTP backend for demo
+        angular.module('busConnectApp').run(['$httpBackend', function($httpBackend) {
+            // Mock reviews data
+            const reviews = [
+                {
+                    id: 1,
+                    routeId: 'route-1',
+                    userId: 'user-1',
+                    userName: 'John Doe',
+                    rating: 4,
+                    comment: 'Great route with scenic views. Bus was comfortable and on time.',
+                    date: '2024-01-15T10:30:00Z'
+                },
+                {
+                    id: 2,
+                    routeId: 'route-1',
+                    userId: 'user-2',
+                    userName: 'Jane Smith',
+                    rating: 5,
+                    comment: 'Excellent service! Clean bus and friendly staff.',
+                    date: '2024-01-10T14:20:00Z'
+                }
+            ];
+            
+            $httpBackend.whenGET('/api/routes/route-1/reviews').respond(reviews);
+            $httpBackend.whenGET('/api/routes/route-1/summary').respond({
+                averageRating: 4.5,
+                totalReviews: 2
+            });
+            $httpBackend.whenGET('/api/routes/route-1/can-review/guest').respond({
+                canReview: true
+            });
+            $httpBackend.whenPOST('/api/routes/route-1/reviews').respond(function(method, url, data) {
+                const newReview = JSON.parse(data);
+                newReview.id = Date.now();
+                reviews.push(newReview);
+                return [200, { success: true, review: newReview }];
+            });
+        }]);
+    </script>
+    
+</body>
+</html>
